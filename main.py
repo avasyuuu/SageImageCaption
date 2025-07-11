@@ -195,7 +195,8 @@ class MultiModelCaptionAnalyzer:
                 
                 generate_ids = model_dict['model'].generate(
                     **inputs,
-                    max_new_tokens=22,   # TOKEN SIZE FOR LLAVA
+                    max_new_tokens=30,
+                    min_new_tokens=10,   # TOKEN SIZE FOR LLAVA
                     do_sample=False
                 )
                 
@@ -206,8 +207,15 @@ class MultiModelCaptionAnalyzer:
                 )[0]
                 
                 caption = full_output.split("ASSISTANT:")[-1].strip()
+                # Clean up any incomplete sentences
+                if caption and not caption[-1] in '.!?':
+                    # If sentence doesn't end properly, try to complete it
+                    last_space = caption.rfind('.')
+                    if last_space > 20:  # Only truncate if we have a reasonable amount of text
+                        caption = caption[:last_space] + '.'
 
             elif model_dict['type'] == 'paligemma':
+                # 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     access token
                 # PaliGemma uses task prompts
                 prompt = "<image>describe"          # For description
                # prompt = "<image>caption en"        # For English caption
@@ -335,7 +343,7 @@ def analyze_multiple_images(image_paths):
 # Main execution
 if __name__ == "__main__":
     # Your image path
-    image_path = r'C:\Users\avasy\imagedataset\intersectiondata2.jpg'
+    image_path = r'C:\Users\avasy\imagedataset\streetdata1.webp'
     
     # Run the analysis
     print("\n🚀 Starting Multi-Model Caption Analysis...")
