@@ -1,7 +1,8 @@
 import torch
 from transformers import (
     AutoModelForCausalLM, AutoTokenizer, AutoProcessor,
-    BlipProcessor, BlipForConditionalGeneration
+    BlipProcessor, BlipForConditionalGeneration, LlavaForConditionalGeneration, LlavaProcessor,
+    PaliGemmaForConditionalGeneration, PaliGemmaProcessor
 )
 from ultralytics import YOLO
 from PIL import Image
@@ -20,6 +21,8 @@ class MultiModelCaptionAnalyzer:
         self._load_yolo()
         self._load_blip()
         self._load_florence()
+        self._load_paligemma()
+        self._load_llava()
         
         print(f"\n✓ Successfully loaded {len(self.models)} models + YOLO")
         print(f"  Active models: {list(self.models.keys())}")
@@ -68,6 +71,82 @@ class MultiModelCaptionAnalyzer:
         except Exception as e:
             print(f"   ✗ Florence-2 error: {e}")
     
+    def _load_llava(self):
+        """Load LLaVA model"""
+        print("\n4. Loading LLaVA...")
+        try:
+            model_id = "llava-hf/bakLlava-v1-hf"  # Using smaller variant
+            
+            from transformers import BitsAndBytesConfig
+            quantization_config = BitsAndBytesConfig(
+                load_in_4bit=True,
+                bnb_4bit_compute_dtype=torch.float16
+            ) if self.device == "cuda" else None
+            
+            self.models['LLaVA'] = {
+                'processor': AutoProcessor.from_pretrained(model_id),
+                'model': LlavaForConditionalGeneration.from_pretrained(
+                    model_id,
+                    quantization_config=quantization_config,
+                    device_map="auto" if self.device == "cuda" else None
+                ),
+                'type': 'llava'
+            }
+            print("   ✓ LLaVA loaded")
+        except Exception as e:
+            print(f"   ✗ LLaVA error: {e}")
+
+    def _load_paligemma(self):
+        """Load PaliGemma - trying different versions"""
+        print("\n5. Loading PaliGemma...")
+        
+        # List of PaliGemma models to try (from most open to most restricted)
+        paligemma_models = [
+            "google/paligemma-3b-pt-224",     # Base pre-trained
+            "google/paligemma-3b-mix-224",    # Mixed training
+            "google/paligemma-3b-mix-448",    # Higher resolution
+            "google/paligemma-3b-ft-vqav2-224", # Fine-tuned for VQA
+        ]
+        
+        loaded = False
+        for model_id in paligemma_models:
+            try:
+                print(f"   Trying {model_id}...")
+                
+                from transformers import BitsAndBytesConfig
+                quantization_config = BitsAndBytesConfig(
+                    load_in_4bit=True,
+                    bnb_4bit_compute_dtype=torch.float16
+                ) if self.device == "cuda" else None
+                
+                self.models['PaliGemma'] = {
+                    'processor': AutoProcessor.from_pretrained(model_id),
+                    'model': PaliGemmaForConditionalGeneration.from_pretrained(
+                        model_id,
+                        quantization_config=quantization_config,
+                        device_map="auto" if self.device == "cuda" else None,
+                        torch_dtype=torch.float16 if self.device == "cuda" else torch.float32
+                    ),
+                    'type': 'paligemma'
+                }
+                print(f"   ✓ PaliGemma loaded successfully using {model_id}")
+                loaded = True
+                break
+                
+            except Exception as e:
+                if "restricted" in str(e) or "401" in str(e):
+                    continue
+                else:
+                    print(f"   Error with {model_id}: {str(e)[:50]}...")
+        
+        if not loaded:
+            print("   ✗ All PaliGemma models require authentication")
+            print("   To use PaliGemma:")
+            print("   1. Run: pip install huggingface_hub")
+            print("   2. Run: huggingface-cli login")
+            print("   3. Visit https://huggingface.co/google/paligemma-3b-pt-224")
+            print("   4. Accept the license agreement")
+    
     def generate_caption(self, image, model_name, model_dict):
         """Generate caption for specific model"""
         try:
@@ -103,7 +182,61 @@ class MultiModelCaptionAnalyzer:
                     image_size=(image.width, image.height)
                 )
                 caption = parsed[task_prompt]
+
+            elif model_dict['type'] == 'llava':
+                # LLaVA uses a conversation format
+                prompt = "USER: <image>\nDescribe this image.\nASSISTANT:"
                 
+                inputs = model_dict['processor'](
+                    text=prompt,
+                    images=image,
+                    return_tensors="pt"
+                ).to(self.device)
+                
+                generate_ids = model_dict['model'].generate(
+                    **inputs,
+                    max_new_tokens=22,   # TOKEN SIZE FOR LLAVA
+                    do_sample=False
+                )
+                
+                full_output = model_dict['processor'].batch_decode(
+                    generate_ids,
+                    skip_special_tokens=True,
+                    clean_up_tokenization_spaces=False
+                )[0]
+                
+                caption = full_output.split("ASSISTANT:")[-1].strip()
+
+            elif model_dict['type'] == 'paligemma':
+                # PaliGemma uses task prompts
+                prompt = "<image>describe"          # For description
+               # prompt = "<image>caption en"        # For English caption
+               # prompt = "<image>answer en what is in this image?"  # For Q&A
+               # prompt = "<image>detect"           # For object detection
+                
+                inputs = model_dict['processor'](
+                    text=prompt,
+                    images=image,
+                    return_tensors="pt",
+                    padding="longest"
+                ).to(self.device)
+                
+                with torch.no_grad():
+                    generate_ids = model_dict['model'].generate(
+                        **inputs,
+                        max_new_tokens=100,
+                        do_sample=False
+                    )
+                
+                caption = model_dict['processor'].batch_decode(
+                    generate_ids,
+                    skip_special_tokens=True,
+                    clean_up_tokenization_spaces=True
+                )[0]
+                
+                caption = caption.replace(prompt, "").strip()
+                caption = caption.replace("describe", "").strip()
+                        
             else:
                 caption = "Unknown model type"
                 
