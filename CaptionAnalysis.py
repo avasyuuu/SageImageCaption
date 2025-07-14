@@ -7,6 +7,11 @@ from transformers import (
 from ultralytics import YOLO
 from PIL import Image
 import warnings
+import zipfile
+import json
+import os
+from datetime import datetime
+
 warnings.filterwarnings('ignore')
 
 class MultiModelCaptionAnalyzer:
@@ -312,3 +317,91 @@ class MultiModelCaptionAnalyzer:
             yolo_results[0].show()  # This opens the default image viewer
         
         return captions, objects
+    
+    def analyze_zip_file(self, zip_path, output_json="results.json", show_yolo=False):
+        """Process all images in a zip file and save results to JSON"""
+        
+        results = {
+            "metadata": {
+                "zip_file": zip_path,
+                "processed_date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "models_used": list(self.models.keys()) + ["YOLO"],
+                "device": self.device
+            },
+            "images": []
+        }
+        
+        # Create temp directory for extraction
+        temp_dir = "temp_extracted_images"
+        os.makedirs(temp_dir, exist_ok=True)
+        
+        try:
+            with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+                # Get list of image files
+                image_extensions = ('.jpg', '.jpeg', '.png', '.bmp', '.webp')
+                image_files = [f for f in zip_ref.namelist()
+                            if f.lower().endswith(image_extensions) and not f.startswith('__MACOSX')][:10] #just first 10 images
+                
+                print(f"\nFound {len(image_files)} images in zip file")
+                print("="*70)
+                
+                # Process each image
+                for idx, image_file in enumerate(image_files, 1):
+                    print(f"\n[{idx}/{len(image_files)}] Processing: {image_file}")
+                    print("-"*50)
+                    
+                    try:
+                        # Extract image
+                        zip_ref.extract(image_file, temp_dir)
+                        image_path = os.path.join(temp_dir, image_file)
+                        
+                        # Load image
+                        image = Image.open(image_path).convert('RGB')
+                        
+                        # Get YOLO detections
+                        objects, yolo_results = self.detect_objects_yolo(image)
+                        
+                        # Get captions from each model
+                        captions = {}
+                        for model_name, model_dict in self.models.items():
+                            caption = self.generate_caption(image, model_name, model_dict)
+                            captions[model_name] = caption
+                            print(f"  {model_name}: {caption[:50]}...")
+                        
+                        # Format YOLO data
+                        yolo_data = {
+                            "object_count": len(objects),
+                            "objects": [{"name": obj, "confidence": conf} for obj, conf in objects]
+                        }
+                        
+                        # Add to results
+                        results["images"].append({
+                            "filename": image_file,
+                            "captions": captions,
+                            "yolo_detection": yolo_data
+                        })
+                        
+                        # Clean up extracted file
+                        os.remove(image_path)
+                        
+                    except Exception as e:
+                        print(f"  Error processing {image_file}: {str(e)}")
+                        results["images"].append({
+                            "filename": image_file,
+                            "error": str(e)
+                        })
+            
+            # Save results to JSON
+            with open(output_json, 'w', encoding='utf-8') as f:
+                json.dump(results, f, indent=2, ensure_ascii=False)
+            
+            print(f"\n✅ Results saved to: {output_json}")
+            print(f"   Processed {len(results['images'])} images")
+            
+        finally:
+            # Clean up temp directory
+            import shutil
+            if os.path.exists(temp_dir):
+                shutil.rmtree(temp_dir)
+        
+        return results

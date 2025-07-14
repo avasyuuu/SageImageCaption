@@ -1,0 +1,338 @@
+{
+  "metadata": {
+    "zip_file": "C:\\Users\\avasy\\imagedataset\\test_images.zip",
+    "processed_date": "2025-07-14 10:26:40",
+    "models_used": [
+      "BLIP",
+      "Florence-2",
+      "PaliGemma",
+      "LLaVA",
+      "YOLO"
+    ],
+    "device": "cuda"
+  },
+  "images": [
+    {
+      "filename": "test_images/APN_S2_13U_R3_IMAG0013.JPG",
+      "captions": {
+        "BLIP": "there is a deer that is walking in the grass by a tree",
+        "Florence-2": "A hyena walking through a dry grass field next to a tree.",
+        "PaliGemma": "A camera trap image of a leopard in Samburu National Reserve, Kenya",
+        "LLaVA": "The image depicts a dry, grassy field with a few trees scattered throughout the area."
+      },
+      "yolo_detection": {
+        "object_count": 0,
+        "objects": []
+      }
+    },
+    {
+      "filename": "test_images/APN_S2_13U_R3_IMAG0033.JPG",
+      "captions": {
+        "BLIP": "three antelope running in a field with a tree in the background",
+        "Florence-2": "A group of antelope walking across a dry grass field.",
+        "PaliGemma": "A camera trap image of three female common impala",
+        "LLaVA": "The image features a group of four small antelope walking across a dry, dusty field."
+      },
+      "yolo_detection": {
+        "object_count": 3,
+        "objects": [
+          {
+            "name": "sheep",
+            "confidence": 0.8237977623939514
+          },
+          {
+            "name": "sheep",
+            "confidence": 0.7825889587402344
+          },
+          {
+            "name": "sheep",
+            "confidence": 0.7145973443984985
+          }
+        ]
+      }
+    },
+    {
+      "filename": "test_images/APN_S2_13U_R3_IMAG0105.JPG",
+      "captions": {
+        "BLIP": "there is a fox that is walking in the grass at night",
+        "Florence-2": "A coyote walking through a dry grass field at night.",
+        "PaliGemma": "A coyote at night",
+        "LLaVA": "The image captures a night scene featuring a large wild animal, possibly a fox or a coyote, walking through a field with dry grass"
+      },
+      "yolo_detection": {
+        "object_count": 0,
+        "objects": []
+      }
+    },
+    {
+      "filename": "test_images/APN_S2_13U_R3_IMAG0110.JPG",
+      "captions": {
+        "BLIP": "there is a large antelope that is walking in the dirt",
+        "Florence-2": "A large antelope walking across a dry grass covered field.",
+        "PaliGemma": "A kudu photographed by a camera trap in Kruger National Park, South Africa",
+        "LLaVA": "The image features a large, long-horned animal standing in a dry, dirt field."
+      },
+      "yolo_detection": {
+        "object_count": 0,
+        "objects": []
+      }
+    },
+    {
+      "filename": "test_images/APN_S2_13U_R3_IMAG0122.JPG",
+      "captions": {
+        "BLIP": "there is a porcup in the middle of a field at night",
+        "Florence-2": "An echidna is walking through a field at night. ",
+        "PaliGemma": "A porcupine at night",
+        "LLaVA": "The image captures a night scene in the savannah with two large horned animals, possibly wild boars, walking through the grass."
+      },
+      "yolo_detection": {
+        "object_count": 0,
+        "objects": []
+      }
+    },
+    {
+      "filename": "test_images/APN_S2_13U_R3_IMAG0134.JPG",
+      "captions": {
+        "BLIP": "there is a gazelle that is standing in the middle of a field",
+        "Florence-2": "A herd of antelope walking across a dry grass covered field.",
+        "PaliGemma": "A camera trap image of a group of topi in Samburu National Reserve, Kenya",
+        "LLaVA": "The image features a herd of deer-like animals grazing in a field with a mix of grassy areas and dry, desert-like terrain"
+      },
+      "yolo_detection": {
+        "object_count": 1,
+        "objects": [
+          {
+            "name": "horse",
+            "confidence": 0.7736920714378357
+          }
+        ]
+      }
+    },
+    {
+      "filename": "test_images/APN_S2_13U_R3_IMAG0139.JPG",
+      "captions": {
+        "BLIP": "there are two gazelles that are standing in the dirt",
+        "Florence-2": "A couple of antelope standing next to each other in a field.",
+        "PaliGemma": "A pair of female common impala",
+        "LLaVA": "The image features two young deer walking together in a field with dry grass and sparse vegetation."
+      },
+      "yolo_detection": {
+        "object_count": 0,
+        "objects": []
+      }
+    },
+    {
+      "filename": "test_images/APN_S2_13U_R3_IMAG0143.JPG",
+      "captions": {
+        "BLIP": "there is a deer that is standing in the grass near a tree",
+        "Florence-2": "A small antelope standing in the middle of a dry grass field.",
+        "PaliGemma": "A female common impala",
+        "LLaVA": "The image features a beautiful scene of a wildlife reserve, with a lone giraffe walking across a dry grass field."
+      },
+      "yolo_detection": {
+        "object_count": 0,
+        "objects": []
+      }
+    },
+    {
+      "filename": "test_images/boysPlayingSoccer.jpg",
+      "captions": {
+        "BLIP": "there are two young girls playing soccer on a soccer field",
+        "Florence-2": "two young boys playing soccer on a field",
+        "PaliGemma": "Football",
+        "LLaVA": "The image features two young boys playing soccer on a field."
+      },
+      "yolo_detection": {
+        "object_count": 3,
+        "objects": [
+          {
+            "name": "person",
+            "confidence": 0.9206095337867737
+          },
+          {
+            "name": "person",
+            "confidence": 0.9134219884872437
+          },
+          {
+            "name": "sports ball",
+            "confidence": 0.9104865789413452
+          }
+        ]
+      }
+    },
+    {
+      "filename": "test_images/intersectiondata2.jpg",
+      "captions": {
+        "BLIP": "there is a lot of cars that are driving down the street",
+        "Florence-2": "A traffic camera shows a busy street with cars and trucks.",
+        "PaliGemma": "A 24-hour traffic loop showing the average speed of a vehicle passing through an intersection.",
+        "LLaVA": "The image depicts a busy street in Vancouver, Canada, with numerous cars and trucks caught in a traffic jam."
+      },
+      "yolo_detection": {
+        "object_count": 16,
+        "objects": [
+          {
+            "name": "car",
+            "confidence": 0.9256001710891724
+          },
+          {
+            "name": "car",
+            "confidence": 0.906337320804596
+          },
+          {
+            "name": "car",
+            "confidence": 0.8700700998306274
+          },
+          {
+            "name": "car",
+            "confidence": 0.8410933017730713
+          },
+          {
+            "name": "truck",
+            "confidence": 0.8332511782646179
+          },
+          {
+            "name": "car",
+            "confidence": 0.8279072642326355
+          },
+          {
+            "name": "traffic light",
+            "confidence": 0.8169741630554199
+          },
+          {
+            "name": "car",
+            "confidence": 0.7827073931694031
+          },
+          {
+            "name": "truck",
+            "confidence": 0.7766879200935364
+          },
+          {
+            "name": "car",
+            "confidence": 0.773129403591156
+          },
+          {
+            "name": "traffic light",
+            "confidence": 0.7576698660850525
+          },
+          {
+            "name": "car",
+            "confidence": 0.7401261329650879
+          },
+          {
+            "name": "car",
+            "confidence": 0.7317946553230286
+          },
+          {
+            "name": "car",
+            "confidence": 0.6901296973228455
+          },
+          {
+            "name": "car",
+            "confidence": 0.665242612361908
+          },
+          {
+            "name": "car",
+            "confidence": 0.6070720553398132
+          }
+        ]
+      }
+    },
+    {
+      "filename": "test_images/peoplePlayingBasketball.jpg",
+      "captions": {
+        "BLIP": "several people are playing basketball on a court with a basketball ball",
+        "Florence-2": "A group of people playing basketball on a court.",
+        "PaliGemma": "A woman dribbling a basketball",
+        "LLaVA": "The image features a group of people playing basketball on an outdoor court. There are a total of six people actively participating in the game."
+      },
+      "yolo_detection": {
+        "object_count": 7,
+        "objects": [
+          {
+            "name": "sports ball",
+            "confidence": 0.9410675168037415
+          },
+          {
+            "name": "person",
+            "confidence": 0.9167173504829407
+          },
+          {
+            "name": "person",
+            "confidence": 0.9056192636489868
+          },
+          {
+            "name": "person",
+            "confidence": 0.8917720317840576
+          },
+          {
+            "name": "person",
+            "confidence": 0.7772576808929443
+          },
+          {
+            "name": "person",
+            "confidence": 0.6834680438041687
+          },
+          {
+            "name": "sports ball",
+            "confidence": 0.5893245339393616
+          }
+        ]
+      }
+    },
+    {
+      "filename": "test_images/streetdata1.webp",
+      "captions": {
+        "BLIP": "there are many cars that are stopped at the intersection of pacific hwy ' s and hwy ' s",
+        "Florence-2": "A couple of people walking across a street next to parked cars.",
+        "PaliGemma": "The entrance to the freeway at the intersection of Pacific Street and 108th Avenue in Seattle.",
+        "LLaVA": "The image depicts a busy street with several cars lined up, waiting in a traffic line."
+      },
+      "yolo_detection": {
+        "object_count": 10,
+        "objects": [
+          {
+            "name": "car",
+            "confidence": 0.9261751174926758
+          },
+          {
+            "name": "car",
+            "confidence": 0.8449105024337769
+          },
+          {
+            "name": "person",
+            "confidence": 0.8426442742347717
+          },
+          {
+            "name": "person",
+            "confidence": 0.8289352655410767
+          },
+          {
+            "name": "car",
+            "confidence": 0.8221864700317383
+          },
+          {
+            "name": "car",
+            "confidence": 0.781649649143219
+          },
+          {
+            "name": "car",
+            "confidence": 0.774264395236969
+          },
+          {
+            "name": "car",
+            "confidence": 0.7734168171882629
+          },
+          {
+            "name": "car",
+            "confidence": 0.767867386341095
+          },
+          {
+            "name": "car",
+            "confidence": 0.5747861862182617
+          }
+        ]
+      }
+    }
+  ]
+}
