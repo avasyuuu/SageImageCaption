@@ -11,6 +11,7 @@ Then it uses **BLIP**, **LLava**, **Florence-2**, and **Moondream** to create 4 
 * Initial use will take a while as you have to install all the models into your project
 * After, runtime is around 40 seconds per image
 * For only image captioning, you just need to run `main.py`. However, for caption evaluation using ClaudeAI, you will need to use a Claude API key which will cost credits
+* Also, after testing, I found out that YOLO is not very good at detecting wildlife, but extremely accurate when detecting streets, cars, and people.
 
 ***
 
