@@ -25,6 +25,6 @@ Then it uses **BLIP**, **LLava**, **Florence-2**, and **Moondream** to create 4 
  **Note:** For all options it may ask you to provide an output path for the .json and YOLO imageset (if you selected yes for YOLO). Simply type (anyname).json everytime it's prompted and it will auto create.
 
  ***
-_This is ultimately for sage images that will need to process thousands of images at once, but right now that process may take an hour or so_
+_This is ultimately for sage images that will need to process thousands of images at once, but right now that process may take an hour or so. Right now it looks like each image takes $0.01 to caption for all models._
 
 
