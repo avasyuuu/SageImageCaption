@@ -1,0 +1,216 @@
+{
+  "metadata": {
+    "evaluation_timestamp": "20250717_102842",
+    "original_results_file": "caption_analysis_results.json",
+    "evaluator_model": "claude-3-5-sonnet-20241022",
+    "models_evaluated": [
+      "BLIP",
+      "Florence-2",
+      "LLaVA",
+      "Moondream"
+    ],
+    "total_images": 2,
+    "api_calls_made": 2,
+    "evaluation_method": "batch_per_image"
+  },
+  "model_performance": {
+    "BLIP": {
+      "total_evaluations": 2,
+      "successful_evaluations": 2,
+      "total_score": 145,
+      "average_score": 72.5,
+      "score_distribution": {
+        "0-20": 0,
+        "21-40": 0,
+        "41-60": 1,
+        "61-80": 0,
+        "81-100": 1
+      }
+    },
+    "Florence-2": {
+      "total_evaluations": 2,
+      "successful_evaluations": 2,
+      "total_score": 185,
+      "average_score": 92.5,
+      "score_distribution": {
+        "0-20": 0,
+        "21-40": 0,
+        "41-60": 0,
+        "61-80": 0,
+        "81-100": 2
+      }
+    },
+    "LLaVA": {
+      "total_evaluations": 2,
+      "successful_evaluations": 2,
+      "total_score": 115,
+      "average_score": 57.5,
+      "score_distribution": {
+        "0-20": 0,
+        "21-40": 1,
+        "41-60": 0,
+        "61-80": 1,
+        "81-100": 0
+      }
+    },
+    "Moondream": {
+      "total_evaluations": 2,
+      "successful_evaluations": 2,
+      "total_score": 190,
+      "average_score": 95.0,
+      "score_distribution": {
+        "0-20": 0,
+        "21-40": 0,
+        "41-60": 0,
+        "61-80": 0,
+        "81-100": 2
+      }
+    }
+  },
+  "image_evaluations": [
+    {
+      "filename": "two_test_images/APN_S2_13U_R3_IMAG0033.JPG",
+      "yolo_detection": {
+        "object_count": 1,
+        "objects": [
+          {
+            "name": "horse",
+            "confidence": 0.6432397961616516
+          }
+        ],
+        "detection_image_saved": true
+      },
+      "model_evaluations": {
+        "BLIP": {
+          "accuracy_score": 85,
+          "object_identification_score": 80,
+          "scene_understanding_score": 85,
+          "missing_elements": [
+            "dry/arid landscape",
+            "timestamp/camera info"
+          ],
+          "incorrect_elements": [
+            "running - they are walking"
+          ],
+          "suggested_improvement": "Three antelope walking in line across a dry savanna field with scattered trees",
+          "model_name": "BLIP",
+          "original_caption": "three antelope running in a field with a tree in the background"
+        },
+        "Florence-2": {
+          "accuracy_score": 95,
+          "object_identification_score": 95,
+          "scene_understanding_score": 90,
+          "missing_elements": [
+            "timestamp/camera info"
+          ],
+          "incorrect_elements": [],
+          "suggested_improvement": "Three impala walking in line across an arid savanna landscape with scattered trees",
+          "model_name": "Florence-2",
+          "original_caption": "The image shows three impala walking across a dry grass covered field, surrounded by trees and a clear blue sky."
+        },
+        "LLaVA": {
+          "accuracy_score": 40,
+          "object_identification_score": 30,
+          "scene_understanding_score": 70,
+          "missing_elements": [
+            "correct animal species"
+          ],
+          "incorrect_elements": [
+            "giraffes instead of impala",
+            "four animals instead of three"
+          ],
+          "suggested_improvement": "Three impala walking in single file across a dry savanna field",
+          "model_name": "LLaVA",
+          "original_caption": "The image features a group of four giraffes walking across a dry, dusty field."
+        },
+        "Moondream": {
+          "accuracy_score": 95,
+          "object_identification_score": 95,
+          "scene_understanding_score": 95,
+          "missing_elements": [
+            "timestamp/camera info"
+          ],
+          "incorrect_elements": [],
+          "suggested_improvement": "Caption is already quite comprehensive and accurate, no major improvements needed",
+          "model_name": "Moondream",
+          "original_caption": "The image captures a picturesque scene of three brown impalas walking in a line across a dry, grassy field. The impalas are spread out across the field, with two of them closer together and one slightly behind the other. The field is primarily composed of dry grass and dirt, contrasting with the green trees in the background. The sky is clear and blue, providing a serene backdrop to the scene."
+        }
+      }
+    },
+    {
+      "filename": "two_test_images/boysPlayingSoccer.jpg",
+      "yolo_detection": {
+        "object_count": 3,
+        "objects": [
+          {
+            "name": "sports ball",
+            "confidence": 0.9484379887580872
+          },
+          {
+            "name": "person",
+            "confidence": 0.9027119874954224
+          },
+          {
+            "name": "person",
+            "confidence": 0.8799924254417419
+          }
+        ],
+        "detection_image_saved": true
+      },
+      "model_evaluations": {
+        "BLIP": {
+          "accuracy_score": 60,
+          "object_identification_score": 70,
+          "scene_understanding_score": 70,
+          "missing_elements": [
+            "uniforms",
+            "background details"
+          ],
+          "incorrect_elements": [
+            "identified players as girls"
+          ],
+          "suggested_improvement": "Two young players in red and blue uniforms compete for the soccer ball on a grass field",
+          "model_name": "BLIP",
+          "original_caption": "there are two girls that are playing soccer on the field"
+        },
+        "Florence-2": {
+          "accuracy_score": 90,
+          "object_identification_score": 95,
+          "scene_understanding_score": 95,
+          "missing_elements": [
+            "uniform colors",
+            "player positions"
+          ],
+          "incorrect_elements": [],
+          "suggested_improvement": "Two young players in red and blue jerseys compete for a soccer ball on a grass field, with fencing and buildings visible in the background",
+          "model_name": "Florence-2",
+          "original_caption": "The image shows two young boys playing soccer on a grassy field, surrounded by a fence, trees, and a building in the background. The sky is visible above them, and the boys appear to be having a great time, suggesting that"
+        },
+        "LLaVA": {
+          "accuracy_score": 75,
+          "object_identification_score": 70,
+          "scene_understanding_score": 65,
+          "missing_elements": [
+            "uniform details",
+            "background",
+            "specific actions"
+          ],
+          "incorrect_elements": [],
+          "suggested_improvement": "Two young players in contrasting uniforms actively competing for the ball during a soccer match on an outdoor field",
+          "model_name": "LLaVA",
+          "original_caption": "The image features two young boys playing soccer on a field."
+        },
+        "Moondream": {
+          "accuracy_score": 95,
+          "object_identification_score": 100,
+          "scene_understanding_score": 100,
+          "missing_elements": [],
+          "incorrect_elements": [],
+          "suggested_improvement": "Caption is already quite comprehensive and accurate, no major improvements needed",
+          "model_name": "Moondream",
+          "original_caption": "Two young boys are playing soccer on a lush green field, actively engaged in a friendly match. They are both wearing soccer uniforms, with one boy in a red shirt and the other in a blue shirt. The boy in the red shirt is running towards the soccer ball, while the boy in the blue shirt is attempting to kick it. \n\nThe field is surrounded by trees, creating a serene and enjoyable environment for the game. The boys are wearing soccer cleats and appear to be enjoying the activity."
+        }
+      }
+    }
+  ]
+}

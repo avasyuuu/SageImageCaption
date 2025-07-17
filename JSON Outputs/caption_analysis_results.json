@@ -1,0 +1,64 @@
+{
+  "metadata": {
+    "zip_file": "C:\\Users\\avasy\\imagedataset\\two_test_images.zip",
+    "processed_date": "2025-07-17 10:27:04",
+    "models_used": [
+      "BLIP",
+      "Florence-2",
+      "LLaVA",
+      "Moondream",
+      "YOLO"
+    ],
+    "device": "cuda",
+    "unified_prompt": "Describe the scene and activities in this image",
+    "yolo_output_directory": "yolo_detections"
+  },
+  "images": [
+    {
+      "filename": "two_test_images/APN_S2_13U_R3_IMAG0033.JPG",
+      "captions": {
+        "BLIP": "three antelope running in a field with a tree in the background",
+        "Florence-2": "The image shows three impala walking across a dry grass covered field, surrounded by trees and a clear blue sky.",
+        "LLaVA": "The image features a group of four giraffes walking across a dry, dusty field.",
+        "Moondream": "The image captures a picturesque scene of three brown impalas walking in a line across a dry, grassy field. The impalas are spread out across the field, with two of them closer together and one slightly behind the other. The field is primarily composed of dry grass and dirt, contrasting with the green trees in the background. The sky is clear and blue, providing a serene backdrop to the scene."
+      },
+      "yolo_detection": {
+        "object_count": 1,
+        "objects": [
+          {
+            "name": "horse",
+            "confidence": 0.6432397961616516
+          }
+        ],
+        "detection_image_saved": true
+      }
+    },
+    {
+      "filename": "two_test_images/boysPlayingSoccer.jpg",
+      "captions": {
+        "BLIP": "there are two girls that are playing soccer on the field",
+        "Florence-2": "The image shows two young boys playing soccer on a grassy field, surrounded by a fence, trees, and a building in the background. The sky is visible above them, and the boys appear to be having a great time, suggesting that",
+        "LLaVA": "The image features two young boys playing soccer on a field.",
+        "Moondream": "Two young boys are playing soccer on a lush green field, actively engaged in a friendly match. They are both wearing soccer uniforms, with one boy in a red shirt and the other in a blue shirt. The boy in the red shirt is running towards the soccer ball, while the boy in the blue shirt is attempting to kick it. \n\nThe field is surrounded by trees, creating a serene and enjoyable environment for the game. The boys are wearing soccer cleats and appear to be enjoying the activity."
+      },
+      "yolo_detection": {
+        "object_count": 3,
+        "objects": [
+          {
+            "name": "sports ball",
+            "confidence": 0.9484379887580872
+          },
+          {
+            "name": "person",
+            "confidence": 0.9027119874954224
+          },
+          {
+            "name": "person",
+            "confidence": 0.8799924254417419
+          }
+        ],
+        "detection_image_saved": true
+      }
+    }
+  ]
+}
