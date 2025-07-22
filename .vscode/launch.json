@@ -9,7 +9,7 @@
             "name": "Python Debugger: Current File",
             "type": "debugpy",
             "request": "launch",
-            "program": "${file}",
+            "program": "CaptionAnalysisScripts\\main.py",
             "console": "integratedTerminal"
         }
     ]
