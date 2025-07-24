@@ -3,7 +3,7 @@
 
 This script captions any image type using 4 models:
 It uses **YOLO**, to get an object count and box the objects on the image as well as how confident it is for each object (from 0.0-100.0)
-Then it uses **BLIP**, **LLava**, **Florence-2**, and **Moondream** to create 4 small captions for the image and display in the terminal.
+Then it uses **BLIP**, **LLava**, **Florence-2**, and **Moondream** to create 4 small captions for each image and create several json files as outputs. This includes the captions generated for each model for each image, the Claude evaluation score for each model, and the final report with all the Claude feedback. This will all be auto-generated in a folder called "RESULTS" followed by a timestamp.
 
 ***
 
