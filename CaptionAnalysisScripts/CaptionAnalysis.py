@@ -7,11 +7,11 @@ from transformers import (
 from ultralytics import YOLO
 from PIL import Image
 import warnings
-import zipfile
 import json
 import os
 from datetime import datetime
 import numpy as np
+from pathlib import Path
 
 warnings.filterwarnings('ignore')
 
@@ -307,11 +307,11 @@ class MultiModelCaptionAnalyzer:
         
         return objects, results, saved
 
-    def analyze_zip_file(self, zip_path, output_json="results.json", show_yolo=False, yolo_output_dir=None):
-        """Process all images in a zip file and save results to JSON"""
+    def analyze_directory(self, dir_path, output_json="results.json", show_yolo=False, yolo_output_dir=None):
+        """Process all images in a directory and save results to JSON"""
         results = {
             "metadata": {
-                "zip_file": zip_path,
+                "directory": dir_path,
                 "processed_date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                 "models_used": list(self.models.keys()) + ["YOLO"],
                 "device": self.device,
@@ -325,78 +325,85 @@ class MultiModelCaptionAnalyzer:
             os.makedirs(yolo_output_dir, exist_ok=True)
             print(f"\n📁 YOLO detection images will be saved to: {yolo_output_dir}")
         
-        temp_dir = "temp_extracted_images"
-        os.makedirs(temp_dir, exist_ok=True)
+        # Get all image files from directory
+        image_extensions = ('.jpg', '.jpeg', '.png', '.bmp', '.webp', '.gif')
+        image_files = []
         
-        try:
-            with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-                image_extensions = ('.jpg', '.jpeg', '.png', '.bmp', '.webp')
-                image_files = [f for f in zip_ref.namelist()
-                            if f.lower().endswith(image_extensions) and not f.startswith('__MACOSX')]
+        # Walk through directory and subdirectories
+        for root, dirs, files in os.walk(dir_path):
+            for file in files:
+                if file.lower().endswith(image_extensions):
+                    full_path = os.path.join(root, file)
+                    # Store relative path from the base directory
+                    relative_path = os.path.relpath(full_path, dir_path)
+                    image_files.append((full_path, relative_path))
+        
+        print(f"\nFound {len(image_files)} images in directory")
+        print("="*70)
+        
+        for idx, (image_path, relative_path) in enumerate(image_files, 1):
+            print(f"\n[{idx}/{len(image_files)}] Processing: {relative_path}")
+            print("-"*50)
+            
+            try:
+                image = Image.open(image_path).convert('RGB')
                 
-                print(f"\nFound {len(image_files)} images in zip file")
-                print("="*70)
-                
-                for idx, image_file in enumerate(image_files, 1):
-                    print(f"\n[{idx}/{len(image_files)}] Processing: {image_file}")
-                    print("-"*50)
+                yolo_save_path = None
+                if yolo_output_dir:
+                    # Create subdirectories in YOLO output to match source structure
+                    relative_dir = os.path.dirname(relative_path)
+                    if relative_dir:
+                        yolo_subdir = os.path.join(yolo_output_dir, relative_dir)
+                        os.makedirs(yolo_subdir, exist_ok=True)
                     
-                    try:
-                        zip_ref.extract(image_file, temp_dir)
-                        image_path = os.path.join(temp_dir, image_file)
-                        
-                        image = Image.open(image_path).convert('RGB')
-                        
-                        yolo_save_path = None
-                        if yolo_output_dir:
-                            base_name = os.path.basename(image_file)
-                            name_without_ext = os.path.splitext(base_name)[0]
-                            yolo_save_path = os.path.join(yolo_output_dir, f"{name_without_ext}_yolo.jpg")
-                        
-                        objects, yolo_results, yolo_saved = self.process_yolo_detection(image, yolo_save_path)
-                        
-                        if yolo_saved:
-                            print(f"  ✓ YOLO detection saved: {os.path.basename(yolo_save_path)}")
-                        
-                        captions = {}
-                        for model_name, model_dict in self.models.items():
-                            caption = self.generate_caption(image, model_name, model_dict)
-                            captions[model_name] = caption
-                            print(f"  {model_name}: {caption[:50]}...")
-                        
-                        yolo_data = {
-                            "object_count": len(objects),
-                            "objects": [{"name": obj, "confidence": conf} for obj, conf in objects],
-                            "detection_image_saved": yolo_saved
-                        }
-                        
-                        results["images"].append({
-                            "filename": image_file,
-                            "captions": captions,
-                            "yolo_detection": yolo_data
-                        })
-                        
-                        os.remove(image_path)
-                        
-                    except Exception as e:
-                        print(f"  Error processing {image_file}: {str(e)}")
-                        results["images"].append({
-                            "filename": image_file,
-                            "error": str(e)
-                        })
-            
-            with open(output_json, 'w', encoding='utf-8') as f:
-                json.dump(results, f, indent=2, ensure_ascii=False)
-            
-            print(f"\n✅ Results saved to: {output_json}")
-            print(f"   Processed {len(results['images'])} images")
-            print(f"   Using prompt: '{self.prompt}'")
-            if yolo_output_dir:
-                print(f"   YOLO detections saved to: {yolo_output_dir}")
-            
-        finally:
-            import shutil
-            if os.path.exists(temp_dir):
-                shutil.rmtree(temp_dir)
+                    base_name = os.path.basename(image_path)
+                    name_without_ext = os.path.splitext(base_name)[0]
+                    yolo_filename = f"{name_without_ext}_yolo.jpg"
+                    
+                    if relative_dir:
+                        yolo_save_path = os.path.join(yolo_output_dir, relative_dir, yolo_filename)
+                    else:
+                        yolo_save_path = os.path.join(yolo_output_dir, yolo_filename)
+                
+                objects, yolo_results, yolo_saved = self.process_yolo_detection(image, yolo_save_path)
+                
+                if yolo_saved:
+                    print(f"  ✓ YOLO detection saved: {os.path.basename(yolo_save_path)}")
+                
+                captions = {}
+                for model_name, model_dict in self.models.items():
+                    caption = self.generate_caption(image, model_name, model_dict)
+                    captions[model_name] = caption
+                    print(f"  {model_name}: {caption[:50]}...")
+                
+                yolo_data = {
+                    "object_count": len(objects),
+                    "objects": [{"name": obj, "confidence": conf} for obj, conf in objects],
+                    "detection_image_saved": yolo_saved
+                }
+                
+                results["images"].append({
+                    "filename": relative_path,
+                    "full_path": image_path,
+                    "captions": captions,
+                    "yolo_detection": yolo_data
+                })
+                
+            except Exception as e:
+                print(f"  Error processing {relative_path}: {str(e)}")
+                results["images"].append({
+                    "filename": relative_path,
+                    "full_path": image_path,
+                    "error": str(e)
+                })
+        
+        with open(output_json, 'w', encoding='utf-8') as f:
+            json.dump(results, f, indent=2, ensure_ascii=False)
+        
+        print(f"\n✅ Results saved to: {output_json}")
+        print(f"   Processed {len(results['images'])} images")
+        print(f"   Using prompt: '{self.prompt}'")
+        if yolo_output_dir:
+            print(f"   YOLO detections saved to: {yolo_output_dir}")
         
         return results

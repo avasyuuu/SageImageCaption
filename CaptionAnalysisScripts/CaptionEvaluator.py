@@ -4,7 +4,6 @@ import base64
 import anthropic
 from pathlib import Path
 from typing import Dict
-import zipfile
 from datetime import datetime
 import time
 import shutil
@@ -138,7 +137,7 @@ Be concise but thorough. Focus on major issues rather than minor details."""
                 }
             return evaluations
     
-    def process_json_results(self, json_path: str, zip_path: str = None, output_path: str = None):
+    def process_json_results(self, json_path: str, image_dir: str = None, output_path: str = None):
         """Process the JSON results from MultiModelCaptionAnalyzer"""
         with open(json_path, 'r', encoding='utf-8') as f:
             data = json.load(f)
@@ -147,10 +146,15 @@ Be concise but thorough. Focus on major issues rather than minor details."""
         if output_path is None:
             output_path = f"caption_evaluation_{timestamp}.json"
         
+        # Extract directory path from metadata if not provided
+        if image_dir is None and 'directory' in data['metadata']:
+            image_dir = data['metadata']['directory']
+        
         results = {
             "metadata": {
                 "evaluation_timestamp": timestamp,
                 "original_results_file": json_path,
+                "image_directory": image_dir,
                 "evaluator_model": self.model,
                 "models_evaluated": data['metadata']['models_used'][:-1],  # Exclude YOLO
                 "total_images": len(data['images']),
@@ -170,92 +174,81 @@ Be concise but thorough. Focus on major issues rather than minor details."""
                 "score_distribution": {"0-20": 0, "21-40": 0, "41-60": 0, "61-80": 0, "81-100": 0}
             }
         
-        temp_dir = None
-        if zip_path:
-            temp_dir = f"temp_evaluation_{timestamp}"
-            os.makedirs(temp_dir, exist_ok=True)
-        
-        try:
-            for idx, image_data in enumerate(data['images'], 1):
-                filename = image_data['filename']
-                print(f"\n[{idx}/{len(data['images'])}] Processing: {filename}")
-                
-                if 'error' in image_data:
-                    print(f"  Skipping - original processing error: {image_data['error']}")
-                    continue
-                
-                if zip_path and temp_dir:
-                    with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-                        zip_ref.extract(filename, temp_dir)
-                        image_path = os.path.join(temp_dir, filename)
-                else:
-                    image_path = filename
-                
-                if not os.path.exists(image_path):
-                    print(f"  Error: Image file not found at {image_path}")
-                    continue
-                
-                captions = image_data.get('captions', {})
-                
-                if not captions:
-                    print(f"  No captions found for {filename}")
-                    continue
-                
-                print(f"  Evaluating {len(captions)} captions in single batch...", end='', flush=True)
-                evaluations = self.evaluate_all_captions_for_image(image_path, captions)
-                results['metadata']['api_calls_made'] += 1
-                
-                successful_count = sum(1 for eval_data in evaluations.values() 
-                                     if 'accuracy_score' in eval_data and eval_data['accuracy_score'] >= 0)
-                print(f" Done! ({successful_count}/{len(captions)} successful)")
-                
-                image_result = {
-                    "filename": filename,
-                    "yolo_detection": image_data.get('yolo_detection', {}),
-                    "model_evaluations": evaluations
-                }
-                results['image_evaluations'].append(image_result)
-                
-                for model_name, eval_data in evaluations.items():
-                    if model_name in results['model_performance']:
-                        perf = results['model_performance'][model_name]
-                        perf['total_evaluations'] += 1
+        for idx, image_data in enumerate(data['images'], 1):
+            filename = image_data['filename']
+            print(f"\n[{idx}/{len(data['images'])}] Processing: {filename}")
+            
+            if 'error' in image_data:
+                print(f"  Skipping - original processing error: {image_data['error']}")
+                continue
+            
+            # Use full_path if available, otherwise construct from directory
+            if 'full_path' in image_data:
+                image_path = image_data['full_path']
+            elif image_dir:
+                image_path = os.path.join(image_dir, filename)
+            else:
+                image_path = filename
+            
+            if not os.path.exists(image_path):
+                print(f"  Error: Image file not found at {image_path}")
+                continue
+            
+            captions = image_data.get('captions', {})
+            
+            if not captions:
+                print(f"  No captions found for {filename}")
+                continue
+            
+            print(f"  Evaluating {len(captions)} captions in single batch...", end='', flush=True)
+            evaluations = self.evaluate_all_captions_for_image(image_path, captions)
+            results['metadata']['api_calls_made'] += 1
+            
+            successful_count = sum(1 for eval_data in evaluations.values() 
+                                 if 'accuracy_score' in eval_data and eval_data['accuracy_score'] >= 0)
+            print(f" Done! ({successful_count}/{len(captions)} successful)")
+            
+            image_result = {
+                "filename": filename,
+                "full_path": image_path,
+                "yolo_detection": image_data.get('yolo_detection', {}),
+                "model_evaluations": evaluations
+            }
+            results['image_evaluations'].append(image_result)
+            
+            for model_name, eval_data in evaluations.items():
+                if model_name in results['model_performance']:
+                    perf = results['model_performance'][model_name]
+                    perf['total_evaluations'] += 1
+                    
+                    if 'accuracy_score' in eval_data and eval_data['accuracy_score'] >= 0:
+                        perf['successful_evaluations'] += 1
+                        score = eval_data['accuracy_score']
+                        perf['total_score'] += score
                         
-                        if 'accuracy_score' in eval_data and eval_data['accuracy_score'] >= 0:
-                            perf['successful_evaluations'] += 1
-                            score = eval_data['accuracy_score']
-                            perf['total_score'] += score
-                            
-                            if score <= 20:
-                                perf['score_distribution']['0-20'] += 1
-                            elif score <= 40:
-                                perf['score_distribution']['21-40'] += 1
-                            elif score <= 60:
-                                perf['score_distribution']['41-60'] += 1
-                            elif score <= 80:
-                                perf['score_distribution']['61-80'] += 1
-                            else:
-                                perf['score_distribution']['81-100'] += 1
-                
-                if zip_path and temp_dir and os.path.exists(image_path):
-                    os.remove(image_path)
-                
-                time.sleep(0.5)
+                        if score <= 20:
+                            perf['score_distribution']['0-20'] += 1
+                        elif score <= 40:
+                            perf['score_distribution']['21-40'] += 1
+                        elif score <= 60:
+                            perf['score_distribution']['41-60'] += 1
+                        elif score <= 80:
+                            perf['score_distribution']['61-80'] += 1
+                        else:
+                            perf['score_distribution']['81-100'] += 1
             
-            for model_name, perf in results['model_performance'].items():
-                if perf['successful_evaluations'] > 0:
-                    perf['average_score'] = round(perf['total_score'] / perf['successful_evaluations'], 1)
-            
-            with open(output_path, 'w', encoding='utf-8') as f:
-                json.dump(results, f, indent=2, ensure_ascii=False)
-            
-            self.print_summary(results)
-            
-            print(f"\n✅ Evaluation complete! Results saved to: {output_path}")
-            
-        finally:
-            if temp_dir and os.path.exists(temp_dir):
-                shutil.rmtree(temp_dir)
+            time.sleep(0.5)
+        
+        for model_name, perf in results['model_performance'].items():
+            if perf['successful_evaluations'] > 0:
+                perf['average_score'] = round(perf['total_score'] / perf['successful_evaluations'], 1)
+        
+        with open(output_path, 'w', encoding='utf-8') as f:
+            json.dump(results, f, indent=2, ensure_ascii=False)
+        
+        self.print_summary(results)
+        
+        print(f"\n✅ Evaluation complete! Results saved to: {output_path}")
         
         return results
     

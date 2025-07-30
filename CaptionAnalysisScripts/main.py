@@ -26,8 +26,8 @@ def create_output_structure(base_name="RESULTS"):
     
     return paths
 
-def process_zip_file(zip_path, output_paths, prompt="Describe this image in detail", save_yolo=True):
-    """Process zip file with organized output structure"""
+def process_directory(dir_path, output_paths, prompt="Describe this image in detail", save_yolo=True):
+    """Process directory with organized output structure"""
     caption_json = os.path.join(output_paths['json'], 'caption_results.json')
     yolo_dir = output_paths['yolo'] if save_yolo else None
     
@@ -38,11 +38,11 @@ def process_zip_file(zip_path, output_paths, prompt="Describe this image in deta
     print("\n🚀 Initializing Multi-Model Caption Analysis...")
     analyzer = MultiModelCaptionAnalyzer(prompt=prompt)
     
-    print(f"\n📁 Processing zip file: {zip_path}")
+    print(f"\n📁 Processing directory: {dir_path}")
     print(f"📂 Output directory: {output_paths['root']}")
     
-    results = analyzer.analyze_zip_file(
-        zip_path, 
+    results = analyzer.analyze_directory(
+        dir_path, 
         output_json=caption_json, 
         show_yolo=False,
         yolo_output_dir=yolo_dir
@@ -54,7 +54,7 @@ def process_zip_file(zip_path, output_paths, prompt="Describe this image in deta
         f.write(f"Caption Generation Log\n")
         f.write(f"{'='*50}\n")
         f.write(f"Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-        f.write(f"Input file: {zip_path}\n")
+        f.write(f"Input directory: {dir_path}\n")
         f.write(f"Prompt: {prompt}\n")
         f.write(f"Models used: {', '.join(results['metadata']['models_used'])}\n")
         f.write(f"Images processed: {len(results['images'])}\n")
@@ -65,7 +65,7 @@ def process_zip_file(zip_path, output_paths, prompt="Describe this image in deta
     print("\n✅ Caption generation complete!")
     return results, caption_json
 
-def evaluate_captions(caption_json_path, zip_path, api_key, output_paths):
+def evaluate_captions(caption_json_path, image_dir, api_key, output_paths):
     """Evaluate captions with organized output"""
     eval_json = os.path.join(output_paths['json'], 'evaluation_results.json')
     
@@ -79,7 +79,7 @@ def evaluate_captions(caption_json_path, zip_path, api_key, output_paths):
     print(f"\n📊 Evaluating captions from: {caption_json_path}")
     evaluation_results = evaluator.process_json_results(
         json_path=caption_json_path,
-        zip_path=zip_path,
+        image_dir=image_dir,
         output_path=eval_json
     )
     
@@ -127,6 +127,7 @@ def create_combined_report(caption_results, evaluation_results, output_paths):
         if eval_data:
             combined_entry = {
                 "filename": filename,
+                "full_path": img_data.get('full_path', ''),
                 "yolo_detection": img_data.get('yolo_detection', {}),
                 "captions_and_scores": {}
             }
@@ -153,12 +154,11 @@ def create_combined_report(caption_results, evaluation_results, output_paths):
     
     return combined
 
-def archive_previous_outputs(base_dir="caption_analysis_*"):
+def archive_previous_outputs(base_dir="RESULTS_*"):
     """Archive previous output directories"""
     archive_dir = "archived_outputs"
     
     # Find all previous output directories
-    import glob
     prev_outputs = glob.glob(base_dir)
     
     if prev_outputs:
@@ -176,7 +176,7 @@ def archive_previous_outputs(base_dir="caption_analysis_*"):
 
 def main():
     """Main execution function with organized output structure"""
-    DEFAULT_ZIP_PATH = r"C:\Users\avasy\imagedataset\test_images.zip"
+    DEFAULT_DIR_PATH = r"C:\Users\avasy\SageImageCaptioning\SageImageCaption\test_images"
     DEFAULT_PROMPT = "Describe this image in detail"
     
     PROMPT_EXAMPLES = [
@@ -193,7 +193,7 @@ def main():
     print("="*70)
     
     # Ask about archiving
-    if len(glob.glob("caption_analysis_*")) > 0:
+    if len(glob.glob("RESULTS_*")) > 0:
         archive = input("\nArchive previous outputs? (y/n) [y]: ").strip().lower()
         if archive != 'n':
             archive_previous_outputs()
@@ -218,7 +218,11 @@ def main():
         print("MODE: CAPTION GENERATION ONLY")
         print("="*50)
         
-        zip_path = input(f"\nZip file path [{DEFAULT_ZIP_PATH}]: ").strip() or DEFAULT_ZIP_PATH
+        dir_path = input(f"\nImage directory path [{DEFAULT_DIR_PATH}]: ").strip() or DEFAULT_DIR_PATH
+        
+        if not os.path.exists(dir_path):
+            print(f"\n❌ Error: Directory '{dir_path}' not found!")
+            sys.exit(1)
         
         print("\n📝 Prompt Selection:")
         print("Choose a prompt or enter your own:")
@@ -239,8 +243,8 @@ def main():
         save_yolo = save_yolo != 'n'
         
         try:
-            caption_results, caption_json = process_zip_file(
-                zip_path, output_paths, prompt, save_yolo
+            caption_results, caption_json = process_directory(
+                dir_path, output_paths, prompt, save_yolo
             )
             
             print(f"\n✅ Caption generation complete!")
@@ -252,6 +256,8 @@ def main():
             
         except Exception as e:
             print(f"\n❌ Error: {str(e)}")
+            import traceback
+            traceback.print_exc()
             sys.exit(1)
     
     elif mode == '2':
@@ -273,17 +279,23 @@ def main():
                 caption_data = json.load(f)
                 used_prompt = caption_data.get('metadata', {}).get('unified_prompt', 'Unknown')
                 print(f"\n📝 Original prompt used: '{used_prompt}'")
+                
+                # Get image directory from metadata
+                image_dir = caption_data.get('metadata', {}).get('directory', None)
+                if image_dir:
+                    print(f"📁 Original image directory: {image_dir}")
         except Exception as e:
-            print(f"\n⚠️  Could not read prompt from file: {e}")
+            print(f"\n⚠️  Could not read metadata from file: {e}")
+            image_dir = None
         
-        print("\nDo you have the original zip file? (needed to extract images)")
-        has_zip = input("(y/n): ").strip().lower() == 'y'
-        
-        zip_path = None
-        if has_zip:
-            zip_path = input(f"Zip file path [{DEFAULT_ZIP_PATH}]: ").strip() or DEFAULT_ZIP_PATH
-        else:
-            print("\n⚠️  Warning: Without zip file, images must be at their original paths")
+        # Ask for directory if not found in metadata or doesn't exist
+        if not image_dir or not os.path.exists(image_dir):
+            print("\nImage directory not found in metadata or doesn't exist.")
+            image_dir = input(f"Enter image directory path [{DEFAULT_DIR_PATH}]: ").strip() or DEFAULT_DIR_PATH
+            
+            if not os.path.exists(image_dir):
+                print(f"\n❌ Error: Directory '{image_dir}' not found!")
+                sys.exit(1)
         
         api_key = os.environ.get('ANTHROPIC_API_KEY')
         if not api_key:
@@ -298,7 +310,7 @@ def main():
                 caption_results = json.load(f)
             
             evaluation_results, eval_json = evaluate_captions(
-                caption_json, zip_path, api_key, output_paths
+                caption_json, image_dir, api_key, output_paths
             )
             
             combined_report = create_combined_report(
@@ -314,6 +326,8 @@ def main():
             
         except Exception as e:
             print(f"\n❌ Error: {str(e)}")
+            import traceback
+            traceback.print_exc()
             sys.exit(1)
     
     else:  # mode == '3'
@@ -321,7 +335,11 @@ def main():
         print("MODE: FULL PIPELINE (CAPTION + EVALUATION)")
         print("="*50)
         
-        zip_path = input(f"\nZip file path [{DEFAULT_ZIP_PATH}]: ").strip() or DEFAULT_ZIP_PATH
+        dir_path = input(f"\nImage directory path [{DEFAULT_DIR_PATH}]: ").strip() or DEFAULT_DIR_PATH
+        
+        if not os.path.exists(dir_path):
+            print(f"\n❌ Error: Directory '{dir_path}' not found!")
+            sys.exit(1)
         
         print("\n📝 Prompt Selection:")
         print("Choose a prompt or enter your own:")
@@ -353,15 +371,15 @@ def main():
             print("\n" + "="*50)
             print("STEP 1: GENERATING CAPTIONS")
             print("="*50)
-            caption_results, caption_json = process_zip_file(
-                zip_path, output_paths, prompt, save_yolo
+            caption_results, caption_json = process_directory(
+                dir_path, output_paths, prompt, save_yolo
             )
             
             print("\n" + "="*50)
             print("STEP 2: EVALUATING CAPTIONS")
             print("="*50)
             evaluation_results, eval_json = evaluate_captions(
-                caption_json, zip_path, api_key, output_paths
+                caption_json, dir_path, api_key, output_paths
             )
             
             print("\n" + "="*50)
