@@ -6,7 +6,6 @@ from pathlib import Path
 from typing import Dict
 from datetime import datetime
 import time
-import shutil
 
 class ClaudeCaptionEvaluator:
     def __init__(self, api_key: str):
@@ -55,8 +54,7 @@ Return a JSON object with this exact structure:
         "missing_elements": ["element1", "element2"],
         "incorrect_elements": ["element1", "element2"],
         "suggested_improvement": "Brief improved caption"
-    }},
-    // ... repeat for each model
+    }}
 }}
 
 Be concise but thorough. Focus on major issues rather than minor details."""
@@ -146,7 +144,6 @@ Be concise but thorough. Focus on major issues rather than minor details."""
         if output_path is None:
             output_path = f"caption_evaluation_{timestamp}.json"
         
-        # Extract directory path from metadata if not provided
         if image_dir is None and 'directory' in data['metadata']:
             image_dir = data['metadata']['directory']
         
@@ -156,7 +153,7 @@ Be concise but thorough. Focus on major issues rather than minor details."""
                 "original_results_file": json_path,
                 "image_directory": image_dir,
                 "evaluator_model": self.model,
-                "models_evaluated": data['metadata']['models_used'][:-1],  # Exclude YOLO
+                "models_evaluated": [m for m in data['metadata']['models_used'] if m != 'YOLO'],
                 "total_images": len(data['images']),
                 "api_calls_made": 0,
                 "evaluation_method": "batch_per_image"
@@ -182,7 +179,6 @@ Be concise but thorough. Focus on major issues rather than minor details."""
                 print(f"  Skipping - original processing error: {image_data['error']}")
                 continue
             
-            # Use full_path if available, otherwise construct from directory
             if 'full_path' in image_data:
                 image_path = image_data['full_path']
             elif image_dir:
@@ -304,3 +300,4 @@ Be concise but thorough. Focus on major issues rather than minor details."""
         print("\nTop 3 Worst Captions:")
         for filename, model, score in worst_scores[:3]:
             print(f"  • {Path(filename).name} - {model}: {score}/100")
+            

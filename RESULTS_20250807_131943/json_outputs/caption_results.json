@@ -1,0 +1,312 @@
+{
+  "metadata": {
+    "directory": "sage_benchmark\\sage_images_20250807_131911",
+    "processed_date": "2025-08-07 13:20:08",
+    "models_used": [
+      "BLIP",
+      "Florence-2",
+      "LLaVA",
+      "Moondream",
+      "YOLO"
+    ],
+    "device": "cuda",
+    "unified_prompt": "Describe this image in one complete sentence with detail",
+    "yolo_output_directory": "RESULTS_20250807_131943\\yolo_detections",
+    "processing_method": "model-first (optimized)"
+  },
+  "images": [
+    {
+      "filename": "bird\\top_camera_000048b02d15bdcd_0.jpg",
+      "full_path": "sage_benchmark\\sage_images_20250807_131911\\bird\\top_camera_000048b02d15bdcd_0.jpg",
+      "captions": {
+        "BLIP": "there is a plane that is flying in the sky with the sun in the background.",
+        "Florence-2": "The image shows a small plane flying in the sky with the sun shining brightly in the background. The plane is in the center of the image, surrounded by a bright blue sky.",
+        "LLaVA": "The sun is shining brightly in the sky, casting a glare over the scene. In the foreground, a bird is flying with its wings spread wide, silhouetted against the intense sunlight. The bird covers a large portion of the image, while the bright sun in the background creates a contrasting backdrop.",
+        "Moondream": "A small propeller plane soars through a blue sky, moving from left to right with the sun positioned to the right."
+      },
+      "yolo_detection": {
+        "object_count": 0,
+        "objects": [],
+        "detection_image_saved": false
+      }
+    },
+    {
+      "filename": "bird\\top_camera_000048b02d15bdcd_3.jpg",
+      "full_path": "sage_benchmark\\sage_images_20250807_131911\\bird\\top_camera_000048b02d15bdcd_3.jpg",
+      "captions": {
+        "BLIP": "there is a plane that is flying in the sky with the sun behind it.",
+        "Florence-2": "The image shows an airplane flying through the sky with the sun shining through the clouds, creating a beautiful contrast between the bright blue sky and the dark clouds.",
+        "LLaVA": "The image shows an airplane flying through a cloudy sky. The airplane is positioned diagonally, from the bottom left to the top right of the image, covering a large portion of the frame. The sky is filled with clouds, making the scene appear somewhat hazy. Despite the clouds, the airplane is clearly visible as it soars through the air.",
+        "Moondream": "A black and white propeller plane is seen against a hazy blue sky, with its wings and tail visible and a faint contrail."
+      },
+      "yolo_detection": {
+        "object_count": 1,
+        "objects": [
+          {
+            "name": "airplane",
+            "confidence": 0.5310514569282532
+          }
+        ],
+        "detection_image_saved": true
+      }
+    },
+    {
+      "filename": "bird\\top_camera_000048b02d35a9bf_1.jpg",
+      "full_path": "sage_benchmark\\sage_images_20250807_131911\\bird\\top_camera_000048b02d35a9bf_1.jpg",
+      "captions": {
+        "BLIP": "looking up at a street light with a bird flying in the sky above it.",
+        "Florence-2": "The image shows a wind turbine flying through a blue sky with clouds in the background. On the right side of the image there is a pole, and at the bottom there is some text.",
+        "LLaVA": "A blurry close up of a bird in flight against a backdrop of a cloudy blue sky.",
+        "Moondream": "A white seagull perches on a gray metal pole against a blue sky with scattered clouds."
+      },
+      "yolo_detection": {
+        "object_count": 0,
+        "objects": [],
+        "detection_image_saved": true
+      }
+    },
+    {
+      "filename": "bird\\top_camera_000048b02d35a9bf_2.jpg",
+      "full_path": "sage_benchmark\\sage_images_20250807_131911\\bird\\top_camera_000048b02d35a9bf_2.jpg",
+      "captions": {
+        "BLIP": "looking up at a street light with a bird flying in the sky above it.",
+        "Florence-2": "The image shows a wind turbine flying through a blue sky with clouds in the background. On the right side of the image there is a pole, and at the bottom there is some text.",
+        "LLaVA": "A blurry close up of a bird in flight against a backdrop of a cloudy blue sky.",
+        "Moondream": "A white seagull perches on a gray metal pole against a blue sky with scattered clouds."
+      },
+      "yolo_detection": {
+        "object_count": 0,
+        "objects": [],
+        "detection_image_saved": true
+      }
+    },
+    {
+      "filename": "river\\sample_000048b02d3ae30a_0.jpg",
+      "full_path": "sage_benchmark\\sage_images_20250807_131911\\river\\sample_000048b02d3ae30a_0.jpg",
+      "captions": {
+        "BLIP": "there is a bird ' s - eye view of a river running through a lush green forest.",
+        "Florence-2": "The image shows a large body of water surrounded by trees and bushes, with a clear blue sky in the background. The water is a deep purple color, and the trees are lush and green.",
+        "LLaVA": "A view from above of a river running through a lush green forest. The river is surrounded by trees and greenery, creating a serene and picturesque scene.",
+        "Moondream": "A calm river flows through a lush landscape, with a dense forest on one bank and a grassy bank on the other, under a pale blue sky."
+      },
+      "yolo_detection": {
+        "object_count": 0,
+        "objects": [],
+        "detection_image_saved": false
+      }
+    },
+    {
+      "filename": "river\\sample_000048b02d3ae30a_1.jpg",
+      "full_path": "sage_benchmark\\sage_images_20250807_131911\\river\\sample_000048b02d3ae30a_1.jpg",
+      "captions": {
+        "BLIP": "there is a small pond in the middle of a field surrounded by trees.",
+        "Florence-2": "The image shows a small pond in the middle of a grassy field surrounded by trees and plants, with a clear blue sky in the background.",
+        "LLaVA": "The image shows an aerial view of a river flowing through a lush green forest. The river is surrounded by trees and the landscape is filled with greenery, creating a serene and picturesque scene.",
+        "Moondream": "A calm river meanders through a lush forest, reflecting the clear blue sky and surrounded by a dense collection of trees and shrubs."
+      },
+      "yolo_detection": {
+        "object_count": 0,
+        "objects": [],
+        "detection_image_saved": false
+      }
+    },
+    {
+      "filename": "river\\sample_000048b02d3ae30a_2.jpg",
+      "full_path": "sage_benchmark\\sage_images_20250807_131911\\river\\sample_000048b02d3ae30a_2.jpg",
+      "captions": {
+        "BLIP": "there is a bird - eye view of a river running through a lush green forest.",
+        "Florence-2": "The image shows a large body of water surrounded by lush green grass and trees, with a clear blue sky in the background.",
+        "LLaVA": "The image shows an aerial view of a river surrounded by a forest. The river is flowing through a valley, with the green trees on either side, creating a serene and natural environment.",
+        "Moondream": "A calm river flows through a lush landscape, with a dense forest on one bank and a grassy bank on the other, under a pale blue sky."
+      },
+      "yolo_detection": {
+        "object_count": 0,
+        "objects": [],
+        "detection_image_saved": false
+      }
+    },
+    {
+      "filename": "river\\sample_000048b02d3ae30a_3.jpg",
+      "full_path": "sage_benchmark\\sage_images_20250807_131911\\river\\sample_000048b02d3ae30a_3.jpg",
+      "captions": {
+        "BLIP": "there is a bird ' s - eye view of a river running through a lush green forest.",
+        "Florence-2": "The image shows a large body of water surrounded by lush green grass and trees, with a clear blue sky in the background.",
+        "LLaVA": "The image shows an aerial view of a river flowing through a lush, green landscape. The river is surrounded by dense vegetation, including a large, grassy area. There are several birds scattered throughout the scene, some flying near the river, while others are perched on branches or soaring through the sky. The overall atmosphere of the image is serene and picturesque.",
+        "Moondream": "A calm river flows through a lush landscape, with a dense forest on one bank and a grassy bank on the other, under a pale blue sky."
+      },
+      "yolo_detection": {
+        "object_count": 0,
+        "objects": [],
+        "detection_image_saved": false
+      }
+    },
+    {
+      "filename": "traffic\\bottom_camera_000048b02d15bc65_1.jpg",
+      "full_path": "sage_benchmark\\sage_images_20250807_131911\\traffic\\bottom_camera_000048b02d15bc65_1.jpg",
+      "captions": {
+        "BLIP": "there is a white truck driving down the street at an intersection with other cars.",
+        "Florence-2": "The image shows a view of a city street from the top of a building. We can see vehicles on the road, zebra crossing lines, poles, traffic signals, boards, buildings, trees, and other objects. The sky in the background is filled with clouds.",
+        "LLaVA": "A busy intersection with cars driving through it and a pedestrian crossing the street. The cars are of various sizes and are in different positions in the intersection. There are also trucks present in the scene. The traffic lights are visible, helping to control the flow of vehicles and pedestrians. The street is bustling with activity, demonstrating a typical urban environment.",
+        "Moondream": "A gray pickup truck is parked near a crosswalk at a busy city intersection, with various vehicles present and a red car visible in the distance."
+      },
+      "yolo_detection": {
+        "object_count": 3,
+        "objects": [
+          {
+            "name": "car",
+            "confidence": 0.7991535067558289
+          },
+          {
+            "name": "truck",
+            "confidence": 0.7640997767448425
+          },
+          {
+            "name": "car",
+            "confidence": 0.695288896560669
+          }
+        ],
+        "detection_image_saved": true
+      }
+    },
+    {
+      "filename": "traffic\\left_camera_000048b02d3ae328_3.jpg",
+      "full_path": "sage_benchmark\\sage_images_20250807_131911\\traffic\\left_camera_000048b02d3ae328_3.jpg",
+      "captions": {
+        "BLIP": "there is a car that is driving down the street in the middle of the street.",
+        "Florence-2": "The image shows an aerial view of a city street with cars parked on the side of it. We can see a person riding a bicycle on the footpath, a zebra crossing, trees, poles, buildings, and the sky in the background.",
+        "LLaVA": "A busy street with many cars, some of which are turning right. There is a white car in the middle of the street, and a black car is turning right next to it. Other cars are scattered throughout the scene, and a person can be seen on the left side of the street. The cars are driving on a mix of green and white street markings.",
+        "Moondream": "A busy four-way intersection features a white SUV in motion, flanked by black sedans on a gray road with white lane markings."
+      },
+      "yolo_detection": {
+        "object_count": 9,
+        "objects": [
+          {
+            "name": "car",
+            "confidence": 0.8885448575019836
+          },
+          {
+            "name": "car",
+            "confidence": 0.8501027226448059
+          },
+          {
+            "name": "car",
+            "confidence": 0.7934248447418213
+          },
+          {
+            "name": "car",
+            "confidence": 0.7605935335159302
+          },
+          {
+            "name": "car",
+            "confidence": 0.7183489799499512
+          },
+          {
+            "name": "car",
+            "confidence": 0.5932372212409973
+          },
+          {
+            "name": "car",
+            "confidence": 0.5215244889259338
+          },
+          {
+            "name": "car",
+            "confidence": 0.5099014043807983
+          },
+          {
+            "name": "car",
+            "confidence": 0.5018460750579834
+          }
+        ],
+        "detection_image_saved": true
+      }
+    },
+    {
+      "filename": "traffic\\left_camera_000048b02d3b12e3_0.jpg",
+      "full_path": "sage_benchmark\\sage_images_20250807_131911\\traffic\\left_camera_000048b02d3b12e3_0.jpg",
+      "captions": {
+        "BLIP": "there are many cars that are stopped on the side of the road in a traffic jam.",
+        "Florence-2": "The image shows a traffic jam on a city street with cars parked on the side of it. We can see buildings, trees, poles, lights, boards, people, and other objects in the background. The sky is visible at the top of the image.",
+        "LLaVA": "A traffic jam on a highway with cars and a bus. The cars are in various lanes, some in the left lane, some in the right lane, and some in the middle lane. There is a bus in the far left lane, and a motorcycle in the far right lane. The sun is shining down on the scene, creating a glare for the drivers.",
+        "Moondream": "A bustling city street teems with vehicles of various colors and models, captured from a high vantage point during a busy time."
+      },
+      "yolo_detection": {
+        "object_count": 11,
+        "objects": [
+          {
+            "name": "car",
+            "confidence": 0.9088558554649353
+          },
+          {
+            "name": "car",
+            "confidence": 0.8376197218894958
+          },
+          {
+            "name": "car",
+            "confidence": 0.8117569088935852
+          },
+          {
+            "name": "car",
+            "confidence": 0.8071126937866211
+          },
+          {
+            "name": "car",
+            "confidence": 0.7994175553321838
+          },
+          {
+            "name": "car",
+            "confidence": 0.7803804874420166
+          },
+          {
+            "name": "car",
+            "confidence": 0.7751511931419373
+          },
+          {
+            "name": "car",
+            "confidence": 0.757739782333374
+          },
+          {
+            "name": "car",
+            "confidence": 0.7103671431541443
+          },
+          {
+            "name": "car",
+            "confidence": 0.6191267967224121
+          },
+          {
+            "name": "car",
+            "confidence": 0.565766453742981
+          }
+        ],
+        "detection_image_saved": true
+      }
+    },
+    {
+      "filename": "traffic\\sample_000048b02d3ae31c_2.jpg",
+      "full_path": "sage_benchmark\\sage_images_20250807_131911\\traffic\\sample_000048b02d3ae31c_2.jpg",
+      "captions": {
+        "BLIP": "there is a bus that is driving down the street in the day time.",
+        "Florence-2": "The image shows a view of a city street from the top of a building. We can see vehicles on the road, traffic signals, poles, traffic cones, plants, trees, buildings, hoardings, and other objects. The sky in the background is filled with clouds.",
+        "LLaVA": "A busy street with a large billboard in the background. There are multiple cars and trucks on the road, some of which are waiting at a red light. Several traffic lights can be seen at different points along the street, ensuring the smooth flow of traffic. The billboard in the background is advertising something, but it is not clear what the advertisement is for.",
+        "Moondream": "A white bus and black car navigate a busy city intersection, with traffic lights and street signs guiding the flow, while buildings and trees provide context and contrast."
+      },
+      "yolo_detection": {
+        "object_count": 3,
+        "objects": [
+          {
+            "name": "car",
+            "confidence": 0.7219551801681519
+          },
+          {
+            "name": "car",
+            "confidence": 0.7103930711746216
+          },
+          {
+            "name": "traffic light",
+            "confidence": 0.5453783869743347
+          }
+        ],
+        "detection_image_saved": true
+      }
+    }
+  ]
+}

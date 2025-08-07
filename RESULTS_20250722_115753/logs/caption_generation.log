@@ -1,9 +1,0 @@
-Caption Generation Log
-==================================================
-Timestamp: 2025-07-22 12:06:44
-Input file: C:\Users\avasy\imagedataset\test_images.zip
-Prompt: Describe this image in detail
-Models used: BLIP, Florence-2, LLaVA, Moondream, YOLO
-Images processed: 12
-Output JSON: RESULTS_20250722_115753\json_outputs\caption_results.json
-YOLO detections: RESULTS_20250722_115753\yolo_detections

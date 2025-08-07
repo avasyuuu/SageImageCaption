@@ -1,0 +1,8 @@
+Caption Generation Log
+==================================================
+Timestamp: 2025-08-01 14:36:17
+Input directory: C:\Users\avasy\imagedataset\two_test_images
+Prompt: Describe the scene and activities in this image
+Models used: BLIP, Florence-2, LLaVA, Moondream, YOLO
+Images processed: 2
+Output JSON: RESULTS_20250801_143447\json_outputs\caption_results.json

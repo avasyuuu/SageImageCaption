@@ -1,0 +1,962 @@
+{
+  "metadata": {
+    "timestamp": "2025-08-07 13:23:05",
+    "output_directory": "RESULTS_20250807_131943",
+    "caption_generation": {
+      "directory": "sage_benchmark\\sage_images_20250807_131911",
+      "processed_date": "2025-08-07 13:20:08",
+      "models_used": [
+        "BLIP",
+        "Florence-2",
+        "LLaVA",
+        "Moondream",
+        "YOLO"
+      ],
+      "device": "cuda",
+      "unified_prompt": "Describe this image in one complete sentence with detail",
+      "yolo_output_directory": "RESULTS_20250807_131943\\yolo_detections",
+      "processing_method": "model-first (optimized)"
+    },
+    "evaluation": {
+      "evaluation_timestamp": "20250807_132130",
+      "original_results_file": "RESULTS_20250807_131943\\json_outputs\\caption_results.json",
+      "image_directory": "sage_benchmark\\sage_images_20250807_131911",
+      "evaluator_model": "claude-3-5-sonnet-20241022",
+      "models_evaluated": [
+        "BLIP",
+        "Florence-2",
+        "LLaVA",
+        "Moondream"
+      ],
+      "total_images": 12,
+      "api_calls_made": 12,
+      "evaluation_method": "batch_per_image"
+    }
+  },
+  "model_rankings": {
+    "BLIP": {
+      "total_evaluations": 12,
+      "successful_evaluations": 11,
+      "total_score": 795,
+      "average_score": 72.3,
+      "score_distribution": {
+        "0-20": 0,
+        "21-40": 1,
+        "41-60": 2,
+        "61-80": 3,
+        "81-100": 5
+      }
+    },
+    "Florence-2": {
+      "total_evaluations": 12,
+      "successful_evaluations": 11,
+      "total_score": 760,
+      "average_score": 69.1,
+      "score_distribution": {
+        "0-20": 0,
+        "21-40": 2,
+        "41-60": 0,
+        "61-80": 5,
+        "81-100": 4
+      }
+    },
+    "LLaVA": {
+      "total_evaluations": 12,
+      "successful_evaluations": 11,
+      "total_score": 765,
+      "average_score": 69.5,
+      "score_distribution": {
+        "0-20": 0,
+        "21-40": 2,
+        "41-60": 2,
+        "61-80": 3,
+        "81-100": 4
+      }
+    },
+    "Moondream": {
+      "total_evaluations": 12,
+      "successful_evaluations": 11,
+      "total_score": 935,
+      "average_score": 85.0,
+      "score_distribution": {
+        "0-20": 0,
+        "21-40": 0,
+        "41-60": 0,
+        "61-80": 3,
+        "81-100": 8
+      }
+    }
+  },
+  "detailed_results": [
+    {
+      "filename": "bird\\top_camera_000048b02d15bdcd_0.jpg",
+      "full_path": "sage_benchmark\\sage_images_20250807_131911\\bird\\top_camera_000048b02d15bdcd_0.jpg",
+      "yolo_detection": {
+        "object_count": 0,
+        "objects": [],
+        "detection_image_saved": false
+      },
+      "captions_and_scores": {
+        "BLIP": {
+          "caption": "there is a plane that is flying in the sky with the sun in the background.",
+          "accuracy_score": 85,
+          "object_identification_score": 90,
+          "scene_understanding_score": 85,
+          "missing_elements": [
+            "silhouette nature of image"
+          ],
+          "incorrect_elements": [],
+          "suggested_improvement": "A silhouetted plane flying against a bright sky with the sun creating a strong backlight"
+        },
+        "Florence-2": {
+          "caption": "The image shows a small plane flying in the sky with the sun shining brightly in the background. The plane is in the center of the image, surrounded by a bright blue sky.",
+          "accuracy_score": 75,
+          "object_identification_score": 90,
+          "scene_understanding_score": 70,
+          "missing_elements": [
+            "silhouette effect"
+          ],
+          "incorrect_elements": [
+            "bright blue sky - it's more hazy/grey"
+          ],
+          "suggested_improvement": "A small plane silhouetted against a hazy sky, with bright sunlight creating a dramatic backdrop"
+        },
+        "LLaVA": {
+          "caption": "The sun is shining brightly in the sky, casting a glare over the scene. In the foreground, a bird is flying with its wings spread wide, silhouetted against the intense sunlight. The bird covers a large portion of the image, while the bright sun in the background creates a contrasting backdrop.",
+          "accuracy_score": 40,
+          "object_identification_score": 30,
+          "scene_understanding_score": 80,
+          "missing_elements": [],
+          "incorrect_elements": [
+            "bird - it's actually a plane"
+          ],
+          "suggested_improvement": "A plane silhouetted against the bright sun, creating a dramatic contrast in the hazy sky"
+        },
+        "Moondream": {
+          "caption": "A small propeller plane soars through a blue sky, moving from left to right with the sun positioned to the right.",
+          "accuracy_score": 90,
+          "object_identification_score": 95,
+          "scene_understanding_score": 90,
+          "missing_elements": [
+            "silhouette effect"
+          ],
+          "incorrect_elements": [],
+          "suggested_improvement": "A small propeller plane silhouetted against the bright sun in a hazy sky, flying from left to right"
+        }
+      }
+    },
+    {
+      "filename": "bird\\top_camera_000048b02d15bdcd_3.jpg",
+      "full_path": "sage_benchmark\\sage_images_20250807_131911\\bird\\top_camera_000048b02d15bdcd_3.jpg",
+      "yolo_detection": {
+        "object_count": 1,
+        "objects": [
+          {
+            "name": "airplane",
+            "confidence": 0.5310514569282532
+          }
+        ],
+        "detection_image_saved": true
+      },
+      "captions_and_scores": {
+        "BLIP": {
+          "caption": "there is a plane that is flying in the sky with the sun behind it.",
+          "accuracy_score": 85,
+          "object_identification_score": 80,
+          "scene_understanding_score": 85,
+          "missing_elements": [
+            "blurry/hazy quality"
+          ],
+          "incorrect_elements": [],
+          "suggested_improvement": "A blurry airplane silhouette against a hazy sky with sunlight behind it"
+        },
+        "Florence-2": {
+          "caption": "The image shows an airplane flying through the sky with the sun shining through the clouds, creating a beautiful contrast between the bright blue sky and the dark clouds.",
+          "accuracy_score": 70,
+          "object_identification_score": 80,
+          "scene_understanding_score": 75,
+          "missing_elements": [
+            "blurry/hazy quality"
+          ],
+          "incorrect_elements": [
+            "bright blue sky",
+            "dark clouds"
+          ],
+          "suggested_improvement": "An airplane silhouette flying through a hazy grey sky with diffused sunlight"
+        },
+        "LLaVA": {
+          "caption": "The image shows an airplane flying through a cloudy sky. The airplane is positioned diagonally, from the bottom left to the top right of the image, covering a large portion of the frame. The sky is filled with clouds, making the scene appear somewhat hazy. Despite the clouds, the airplane is clearly visible as it soars through the air.",
+          "accuracy_score": 90,
+          "object_identification_score": 90,
+          "scene_understanding_score": 95,
+          "missing_elements": [
+            "backlit effect"
+          ],
+          "incorrect_elements": [],
+          "suggested_improvement": "A backlit airplane silhouette flying diagonally through a hazy, cloudy sky"
+        },
+        "Moondream": {
+          "caption": "A black and white propeller plane is seen against a hazy blue sky, with its wings and tail visible and a faint contrail.",
+          "accuracy_score": 65,
+          "object_identification_score": 60,
+          "scene_understanding_score": 70,
+          "missing_elements": [
+            "sunlight/backlit effect"
+          ],
+          "incorrect_elements": [
+            "black and white",
+            "contrail",
+            "propeller plane"
+          ],
+          "suggested_improvement": "A commercial airplane silhouette against a hazy grey sky with diffused sunlight"
+        }
+      }
+    },
+    {
+      "filename": "bird\\top_camera_000048b02d35a9bf_1.jpg",
+      "full_path": "sage_benchmark\\sage_images_20250807_131911\\bird\\top_camera_000048b02d35a9bf_1.jpg",
+      "yolo_detection": {
+        "object_count": 0,
+        "objects": [],
+        "detection_image_saved": true
+      },
+      "captions_and_scores": {
+        "BLIP": {
+          "caption": "looking up at a street light with a bird flying in the sky above it.",
+          "accuracy_score": 60,
+          "object_identification_score": 70,
+          "scene_understanding_score": 65,
+          "missing_elements": [
+            "pole appears to be part of larger structure"
+          ],
+          "incorrect_elements": [
+            "street light - structure not clearly a street light"
+          ],
+          "suggested_improvement": "A bird perched on a tall metal structure against a blue sky with scattered clouds"
+        },
+        "Florence-2": {
+          "caption": "The image shows a wind turbine flying through a blue sky with clouds in the background. On the right side of the image there is a pole, and at the bottom there is some text.",
+          "accuracy_score": 30,
+          "object_identification_score": 40,
+          "scene_understanding_score": 35,
+          "missing_elements": [
+            "bird perched on structure"
+          ],
+          "incorrect_elements": [
+            "wind turbine",
+            "text mention",
+            "flying through"
+          ],
+          "suggested_improvement": "A bird perched on a metal pole or structure against a blue sky with scattered clouds"
+        },
+        "LLaVA": {
+          "caption": "A blurry close up of a bird in flight against a backdrop of a cloudy blue sky.",
+          "accuracy_score": 45,
+          "object_identification_score": 60,
+          "scene_understanding_score": 50,
+          "missing_elements": [
+            "structural pole/support"
+          ],
+          "incorrect_elements": [
+            "bird in flight - it appears perched",
+            "blurry - image is fairly clear"
+          ],
+          "suggested_improvement": "A bird perched on a metal structure against a blue sky with clouds"
+        },
+        "Moondream": {
+          "caption": "A white seagull perches on a gray metal pole against a blue sky with scattered clouds.",
+          "accuracy_score": 90,
+          "object_identification_score": 95,
+          "scene_understanding_score": 90,
+          "missing_elements": [
+            "structure appears to be part of larger installation"
+          ],
+          "incorrect_elements": [],
+          "suggested_improvement": "A seagull perched on a tall metal structure against a blue sky with scattered clouds"
+        }
+      }
+    },
+    {
+      "filename": "bird\\top_camera_000048b02d35a9bf_2.jpg",
+      "full_path": "sage_benchmark\\sage_images_20250807_131911\\bird\\top_camera_000048b02d35a9bf_2.jpg",
+      "yolo_detection": {
+        "object_count": 0,
+        "objects": [],
+        "detection_image_saved": true
+      },
+      "captions_and_scores": {
+        "BLIP": {
+          "caption": "looking up at a street light with a bird flying in the sky above it.",
+          "accuracy_score": 60,
+          "object_identification_score": 50,
+          "scene_understanding_score": 70,
+          "missing_elements": [
+            "pole appears to be part of larger structure"
+          ],
+          "incorrect_elements": [
+            "identifies as street light when structure unclear"
+          ],
+          "suggested_improvement": "A view looking up at a metal pole or structure against a blue sky with scattered clouds"
+        },
+        "Florence-2": {
+          "caption": "The image shows a wind turbine flying through a blue sky with clouds in the background. On the right side of the image there is a pole, and at the bottom there is some text.",
+          "accuracy_score": 30,
+          "object_identification_score": 40,
+          "scene_understanding_score": 35,
+          "missing_elements": [
+            "bird/seagull"
+          ],
+          "incorrect_elements": [
+            "wind turbine",
+            "mentions text that isn't visible"
+          ],
+          "suggested_improvement": "A metal pole or structure photographed against a blue sky with scattered clouds"
+        },
+        "LLaVA": {
+          "caption": "A blurry close up of a bird in flight against a backdrop of a cloudy blue sky.",
+          "accuracy_score": 75,
+          "object_identification_score": 85,
+          "scene_understanding_score": 80,
+          "missing_elements": [
+            "pole/structure"
+          ],
+          "incorrect_elements": [
+            "describes as blurry when image is fairly clear"
+          ],
+          "suggested_improvement": "A bird in flight near a metal structure against a blue, partly cloudy sky"
+        },
+        "Moondream": {
+          "caption": "A white seagull perches on a gray metal pole against a blue sky with scattered clouds.",
+          "accuracy_score": 85,
+          "object_identification_score": 90,
+          "scene_understanding_score": 85,
+          "missing_elements": [
+            "structure context"
+          ],
+          "incorrect_elements": [
+            "describes bird as perching when it appears to be flying"
+          ],
+          "suggested_improvement": "A seagull flying near a metal structure against a blue sky with scattered clouds"
+        }
+      }
+    },
+    {
+      "filename": "river\\sample_000048b02d3ae30a_0.jpg",
+      "full_path": "sage_benchmark\\sage_images_20250807_131911\\river\\sample_000048b02d3ae30a_0.jpg",
+      "yolo_detection": {
+        "object_count": 0,
+        "objects": [],
+        "detection_image_saved": false
+      },
+      "captions_and_scores": {
+        "BLIP": {
+          "caption": "there is a bird ' s - eye view of a river running through a lush green forest.",
+          "accuracy_score": 85,
+          "object_identification_score": 90,
+          "scene_understanding_score": 85,
+          "missing_elements": [
+            "purple/unusual water color",
+            "curved nature of river"
+          ],
+          "incorrect_elements": [],
+          "suggested_improvement": "A bird's-eye view of a curved purple river winding through dense forest and grassy slopes"
+        },
+        "Florence-2": {
+          "caption": "The image shows a large body of water surrounded by trees and bushes, with a clear blue sky in the background. The water is a deep purple color, and the trees are lush and green.",
+          "accuracy_score": 90,
+          "object_identification_score": 95,
+          "scene_understanding_score": 90,
+          "missing_elements": [
+            "curved nature of river"
+          ],
+          "incorrect_elements": [
+            "clear blue sky"
+          ],
+          "suggested_improvement": "An aerial view of a curved river with distinctive purple water, surrounded by lush green forest and vegetation"
+        },
+        "LLaVA": {
+          "caption": "A view from above of a river running through a lush green forest. The river is surrounded by trees and greenery, creating a serene and picturesque scene.",
+          "accuracy_score": 85,
+          "object_identification_score": 90,
+          "scene_understanding_score": 85,
+          "missing_elements": [
+            "purple water color",
+            "curved nature of river"
+          ],
+          "incorrect_elements": [],
+          "suggested_improvement": "An aerial view of a curved purple river winding through dense forest and vegetation, creating a natural boundary in the landscape"
+        },
+        "Moondream": {
+          "caption": "A calm river flows through a lush landscape, with a dense forest on one bank and a grassy bank on the other, under a pale blue sky.",
+          "accuracy_score": 95,
+          "object_identification_score": 95,
+          "scene_understanding_score": 95,
+          "missing_elements": [
+            "purple water color"
+          ],
+          "incorrect_elements": [
+            "pale blue sky"
+          ],
+          "suggested_improvement": "A curved purple river flows through a lush landscape, with dense forest on one bank and grassy slopes on the other"
+        }
+      }
+    },
+    {
+      "filename": "river\\sample_000048b02d3ae30a_1.jpg",
+      "full_path": "sage_benchmark\\sage_images_20250807_131911\\river\\sample_000048b02d3ae30a_1.jpg",
+      "yolo_detection": {
+        "object_count": 0,
+        "objects": [],
+        "detection_image_saved": false
+      },
+      "captions_and_scores": {
+        "BLIP": {
+          "caption": "there is a small pond in the middle of a field surrounded by trees.",
+          "accuracy_score": 75,
+          "object_identification_score": 70,
+          "scene_understanding_score": 65,
+          "missing_elements": [
+            "curved/meandering nature",
+            "elevated perspective"
+          ],
+          "incorrect_elements": [
+            "pond - it's actually a river/stream"
+          ],
+          "suggested_improvement": "A curved river section viewed from above, surrounded by forested hills and grassy banks"
+        },
+        "Florence-2": {
+          "caption": "The image shows a small pond in the middle of a grassy field surrounded by trees and plants, with a clear blue sky in the background.",
+          "accuracy_score": 65,
+          "object_identification_score": 60,
+          "scene_understanding_score": 60,
+          "missing_elements": [
+            "elevated view",
+            "curved/meandering nature"
+          ],
+          "incorrect_elements": [
+            "pond - it's a river",
+            "clear blue sky isn't prominent"
+          ],
+          "suggested_improvement": "An elevated view of a curved river segment flowing through grassy banks and forested hillsides"
+        },
+        "LLaVA": {
+          "caption": "The image shows an aerial view of a river flowing through a lush green forest. The river is surrounded by trees and the landscape is filled with greenery, creating a serene and picturesque scene.",
+          "accuracy_score": 90,
+          "object_identification_score": 95,
+          "scene_understanding_score": 95,
+          "missing_elements": [
+            "curved/meandering shape"
+          ],
+          "incorrect_elements": [],
+          "suggested_improvement": "An aerial view of a curved river segment winding through lush green forest and grassland"
+        },
+        "Moondream": {
+          "caption": "A calm river meanders through a lush forest, reflecting the clear blue sky and surrounded by a dense collection of trees and shrubs.",
+          "accuracy_score": 85,
+          "object_identification_score": 90,
+          "scene_understanding_score": 85,
+          "missing_elements": [
+            "elevated perspective"
+          ],
+          "incorrect_elements": [
+            "clear blue sky isn't prominent"
+          ],
+          "suggested_improvement": "An elevated view of a meandering river flowing through dense forest and shrubland"
+        }
+      }
+    },
+    {
+      "filename": "river\\sample_000048b02d3ae30a_2.jpg",
+      "full_path": "sage_benchmark\\sage_images_20250807_131911\\river\\sample_000048b02d3ae30a_2.jpg",
+      "yolo_detection": {
+        "object_count": 0,
+        "objects": [],
+        "detection_image_saved": false
+      },
+      "captions_and_scores": {
+        "BLIP": {
+          "caption": "there is a bird - eye view of a river running through a lush green forest.",
+          "accuracy_score": 75,
+          "object_identification_score": 70,
+          "scene_understanding_score": 80,
+          "missing_elements": [
+            "curved nature of river",
+            "grassy banks"
+          ],
+          "incorrect_elements": [
+            "not exactly bird's-eye view - more elevated angle"
+          ],
+          "suggested_improvement": "An elevated view of a curved river with grassy banks surrounded by dense forest"
+        },
+        "Florence-2": {
+          "caption": "The image shows a large body of water surrounded by lush green grass and trees, with a clear blue sky in the background.",
+          "accuracy_score": 65,
+          "object_identification_score": 75,
+          "scene_understanding_score": 60,
+          "missing_elements": [
+            "curved river shape",
+            "elevated perspective"
+          ],
+          "incorrect_elements": [
+            "clear blue sky - sky isn't visible/clear in image"
+          ],
+          "suggested_improvement": "An elevated view of a winding river flanked by grassy banks and dense forest vegetation"
+        },
+        "LLaVA": {
+          "caption": "The image shows an aerial view of a river surrounded by a forest. The river is flowing through a valley, with the green trees on either side, creating a serene and natural environment.",
+          "accuracy_score": 90,
+          "object_identification_score": 95,
+          "scene_understanding_score": 90,
+          "missing_elements": [
+            "curved/meandering nature of river"
+          ],
+          "incorrect_elements": [],
+          "suggested_improvement": "An aerial view of a meandering river flowing through forested terrain, with grassy banks creating a natural border"
+        },
+        "Moondream": {
+          "caption": "A calm river flows through a lush landscape, with a dense forest on one bank and a grassy bank on the other, under a pale blue sky.",
+          "accuracy_score": 95,
+          "object_identification_score": 95,
+          "scene_understanding_score": 95,
+          "missing_elements": [
+            "elevated perspective"
+          ],
+          "incorrect_elements": [
+            "pale blue sky - sky isn't clearly visible"
+          ],
+          "suggested_improvement": "An elevated view of a calm river curving through the landscape, bordered by a dense forest on one side and grassy banks on the other"
+        }
+      }
+    },
+    {
+      "filename": "river\\sample_000048b02d3ae30a_3.jpg",
+      "full_path": "sage_benchmark\\sage_images_20250807_131911\\river\\sample_000048b02d3ae30a_3.jpg",
+      "yolo_detection": {
+        "object_count": 0,
+        "objects": [],
+        "detection_image_saved": false
+      },
+      "captions_and_scores": {
+        "BLIP": {
+          "caption": "there is a bird ' s - eye view of a river running through a lush green forest.",
+          "accuracy_score": 85,
+          "object_identification_score": 80,
+          "scene_understanding_score": 85,
+          "missing_elements": [
+            "curved nature of river",
+            "vegetation types"
+          ],
+          "incorrect_elements": [
+            "not exactly bird's-eye view - more of a high angle"
+          ],
+          "suggested_improvement": "A high-angle view of a curved river winding through dense vegetation and grassy banks"
+        },
+        "Florence-2": {
+          "caption": "The image shows a large body of water surrounded by lush green grass and trees, with a clear blue sky in the background.",
+          "accuracy_score": 75,
+          "object_identification_score": 70,
+          "scene_understanding_score": 75,
+          "missing_elements": [
+            "river curve",
+            "forest density"
+          ],
+          "incorrect_elements": [
+            "clear blue sky - sky isn't visible",
+            "describes as generic body of water rather than river"
+          ],
+          "suggested_improvement": "A curved river flowing between forested hills and grassy banks, surrounded by dense vegetation"
+        },
+        "LLaVA": {
+          "caption": "The image shows an aerial view of a river flowing through a lush, green landscape. The river is surrounded by dense vegetation, including a large, grassy area. There are several birds scattered throughout the scene, some flying near the river, while others are perched on branches or soaring through the sky. The overall atmosphere of the image is serene and picturesque.",
+          "accuracy_score": 60,
+          "object_identification_score": 65,
+          "scene_understanding_score": 75,
+          "missing_elements": [
+            "specific terrain features"
+          ],
+          "incorrect_elements": [
+            "birds - none clearly visible",
+            "blue sky not shown",
+            "overly detailed about non-existent elements"
+          ],
+          "suggested_improvement": "An elevated view of a curved river flowing through dense forest and grassland, with steep vegetated banks"
+        },
+        "Moondream": {
+          "caption": "A calm river flows through a lush landscape, with a dense forest on one bank and a grassy bank on the other, under a pale blue sky.",
+          "accuracy_score": 90,
+          "object_identification_score": 90,
+          "scene_understanding_score": 95,
+          "missing_elements": [
+            "elevated perspective"
+          ],
+          "incorrect_elements": [
+            "pale blue sky - sky not clearly visible"
+          ],
+          "suggested_improvement": "An elevated view of a calm river curving through the landscape, flanked by dense forest on one side and grassy slopes on the other"
+        }
+      }
+    },
+    {
+      "filename": "traffic\\bottom_camera_000048b02d15bc65_1.jpg",
+      "full_path": "sage_benchmark\\sage_images_20250807_131911\\traffic\\bottom_camera_000048b02d15bc65_1.jpg",
+      "yolo_detection": {
+        "object_count": 3,
+        "objects": [
+          {
+            "name": "car",
+            "confidence": 0.7991535067558289
+          },
+          {
+            "name": "truck",
+            "confidence": 0.7640997767448425
+          },
+          {
+            "name": "car",
+            "confidence": 0.695288896560669
+          }
+        ],
+        "detection_image_saved": true
+      },
+      "captions_and_scores": {
+        "BLIP": {
+          "caption": "there is a white truck driving down the street at an intersection with other cars.",
+          "accuracy_score": 85,
+          "object_identification_score": 80,
+          "scene_understanding_score": 75,
+          "missing_elements": [
+            "crosswalks",
+            "intersection layout",
+            "buildings"
+          ],
+          "incorrect_elements": [],
+          "suggested_improvement": "A silver pickup truck crossing an urban intersection with visible crosswalks and other vehicles present"
+        },
+        "Florence-2": {
+          "caption": "The image shows a view of a city street from the top of a building. We can see vehicles on the road, zebra crossing lines, poles, traffic signals, boards, buildings, trees, and other objects. The sky in the background is filled with clouds.",
+          "accuracy_score": 90,
+          "object_identification_score": 95,
+          "scene_understanding_score": 90,
+          "missing_elements": [
+            "specific vehicle descriptions"
+          ],
+          "incorrect_elements": [
+            "clouds - sky not clearly visible"
+          ],
+          "suggested_improvement": "An aerial view of an urban intersection showing crosswalks, vehicles including a silver pickup truck, traffic signals, and surrounding buildings"
+        },
+        "LLaVA": {
+          "caption": "A busy intersection with cars driving through it and a pedestrian crossing the street. The cars are of various sizes and are in different positions in the intersection. There are also trucks present in the scene. The traffic lights are visible, helping to control the flow of vehicles and pedestrians. The street is bustling with activity, demonstrating a typical urban environment.",
+          "accuracy_score": 75,
+          "object_identification_score": 85,
+          "scene_understanding_score": 80,
+          "missing_elements": [
+            "specific vehicle descriptions"
+          ],
+          "incorrect_elements": [
+            "describes scene as more busy than it appears",
+            "implies multiple trucks"
+          ],
+          "suggested_improvement": "An intersection with a silver pickup truck passing through, marked crosswalks, and several parked vehicles along the street"
+        },
+        "Moondream": {
+          "caption": "A gray pickup truck is parked near a crosswalk at a busy city intersection, with various vehicles present and a red car visible in the distance.",
+          "accuracy_score": 95,
+          "object_identification_score": 95,
+          "scene_understanding_score": 90,
+          "missing_elements": [
+            "traffic signals"
+          ],
+          "incorrect_elements": [
+            "truck is moving, not parked"
+          ],
+          "suggested_improvement": "A silver pickup truck driving through a city intersection with clearly marked crosswalks and other vehicles visible"
+        }
+      }
+    },
+    {
+      "filename": "traffic\\left_camera_000048b02d3ae328_3.jpg",
+      "full_path": "sage_benchmark\\sage_images_20250807_131911\\traffic\\left_camera_000048b02d3ae328_3.jpg",
+      "yolo_detection": {
+        "object_count": 9,
+        "objects": [
+          {
+            "name": "car",
+            "confidence": 0.8885448575019836
+          },
+          {
+            "name": "car",
+            "confidence": 0.8501027226448059
+          },
+          {
+            "name": "car",
+            "confidence": 0.7934248447418213
+          },
+          {
+            "name": "car",
+            "confidence": 0.7605935335159302
+          },
+          {
+            "name": "car",
+            "confidence": 0.7183489799499512
+          },
+          {
+            "name": "car",
+            "confidence": 0.5932372212409973
+          },
+          {
+            "name": "car",
+            "confidence": 0.5215244889259338
+          },
+          {
+            "name": "car",
+            "confidence": 0.5099014043807983
+          },
+          {
+            "name": "car",
+            "confidence": 0.5018460750579834
+          }
+        ],
+        "detection_image_saved": true
+      },
+      "captions_and_scores": {
+        "BLIP": {
+          "caption": "there is a car that is driving down the street in the middle of the street.",
+          "accuracy_score": -1,
+          "object_identification_score": -1,
+          "scene_understanding_score": -1,
+          "missing_elements": [],
+          "incorrect_elements": [],
+          "suggested_improvement": ""
+        },
+        "Florence-2": {
+          "caption": "The image shows an aerial view of a city street with cars parked on the side of it. We can see a person riding a bicycle on the footpath, a zebra crossing, trees, poles, buildings, and the sky in the background.",
+          "accuracy_score": -1,
+          "object_identification_score": -1,
+          "scene_understanding_score": -1,
+          "missing_elements": [],
+          "incorrect_elements": [],
+          "suggested_improvement": ""
+        },
+        "LLaVA": {
+          "caption": "A busy street with many cars, some of which are turning right. There is a white car in the middle of the street, and a black car is turning right next to it. Other cars are scattered throughout the scene, and a person can be seen on the left side of the street. The cars are driving on a mix of green and white street markings.",
+          "accuracy_score": -1,
+          "object_identification_score": -1,
+          "scene_understanding_score": -1,
+          "missing_elements": [],
+          "incorrect_elements": [],
+          "suggested_improvement": ""
+        },
+        "Moondream": {
+          "caption": "A busy four-way intersection features a white SUV in motion, flanked by black sedans on a gray road with white lane markings.",
+          "accuracy_score": -1,
+          "object_identification_score": -1,
+          "scene_understanding_score": -1,
+          "missing_elements": [],
+          "incorrect_elements": [],
+          "suggested_improvement": ""
+        }
+      }
+    },
+    {
+      "filename": "traffic\\left_camera_000048b02d3b12e3_0.jpg",
+      "full_path": "sage_benchmark\\sage_images_20250807_131911\\traffic\\left_camera_000048b02d3b12e3_0.jpg",
+      "yolo_detection": {
+        "object_count": 11,
+        "objects": [
+          {
+            "name": "car",
+            "confidence": 0.9088558554649353
+          },
+          {
+            "name": "car",
+            "confidence": 0.8376197218894958
+          },
+          {
+            "name": "car",
+            "confidence": 0.8117569088935852
+          },
+          {
+            "name": "car",
+            "confidence": 0.8071126937866211
+          },
+          {
+            "name": "car",
+            "confidence": 0.7994175553321838
+          },
+          {
+            "name": "car",
+            "confidence": 0.7803804874420166
+          },
+          {
+            "name": "car",
+            "confidence": 0.7751511931419373
+          },
+          {
+            "name": "car",
+            "confidence": 0.757739782333374
+          },
+          {
+            "name": "car",
+            "confidence": 0.7103671431541443
+          },
+          {
+            "name": "car",
+            "confidence": 0.6191267967224121
+          },
+          {
+            "name": "car",
+            "confidence": 0.565766453742981
+          }
+        ],
+        "detection_image_saved": true
+      },
+      "captions_and_scores": {
+        "BLIP": {
+          "caption": "there are many cars that are stopped on the side of the road in a traffic jam.",
+          "accuracy_score": 70,
+          "object_identification_score": 80,
+          "scene_understanding_score": 60,
+          "missing_elements": [
+            "parking lot setting",
+            "angled parking spaces"
+          ],
+          "incorrect_elements": [
+            "traffic jam - these are parked cars"
+          ],
+          "suggested_improvement": "Multiple vehicles parked in angled spaces along a city street parking area"
+        },
+        "Florence-2": {
+          "caption": "The image shows a traffic jam on a city street with cars parked on the side of it. We can see buildings, trees, poles, lights, boards, people, and other objects in the background. The sky is visible at the top of the image.",
+          "accuracy_score": 85,
+          "object_identification_score": 90,
+          "scene_understanding_score": 85,
+          "missing_elements": [
+            "angled parking spaces",
+            "surveillance camera perspective"
+          ],
+          "incorrect_elements": [
+            "traffic jam - these are parked cars"
+          ],
+          "suggested_improvement": "Aerial view of cars parked in angled spaces along a city street, with buildings and trees visible in the background"
+        },
+        "LLaVA": {
+          "caption": "A traffic jam on a highway with cars and a bus. The cars are in various lanes, some in the left lane, some in the right lane, and some in the middle lane. There is a bus in the far left lane, and a motorcycle in the far right lane. The sun is shining down on the scene, creating a glare for the drivers.",
+          "accuracy_score": 40,
+          "object_identification_score": 60,
+          "scene_understanding_score": 30,
+          "missing_elements": [
+            "parking lot setting",
+            "surveillance camera angle"
+          ],
+          "incorrect_elements": [
+            "highway",
+            "bus",
+            "motorcycle",
+            "traffic jam"
+          ],
+          "suggested_improvement": "Security camera view of vehicles parked in angled spaces in an urban parking area"
+        },
+        "Moondream": {
+          "caption": "A bustling city street teems with vehicles of various colors and models, captured from a high vantage point during a busy time.",
+          "accuracy_score": 75,
+          "object_identification_score": 85,
+          "scene_understanding_score": 80,
+          "missing_elements": [
+            "parking spaces",
+            "surveillance camera perspective"
+          ],
+          "incorrect_elements": [
+            "bustling - cars appear to be parked"
+          ],
+          "suggested_improvement": "High-angle view of parked vehicles in angled spaces along a city street"
+        }
+      }
+    },
+    {
+      "filename": "traffic\\sample_000048b02d3ae31c_2.jpg",
+      "full_path": "sage_benchmark\\sage_images_20250807_131911\\traffic\\sample_000048b02d3ae31c_2.jpg",
+      "yolo_detection": {
+        "object_count": 3,
+        "objects": [
+          {
+            "name": "car",
+            "confidence": 0.7219551801681519
+          },
+          {
+            "name": "car",
+            "confidence": 0.7103930711746216
+          },
+          {
+            "name": "traffic light",
+            "confidence": 0.5453783869743347
+          }
+        ],
+        "detection_image_saved": true
+      },
+      "captions_and_scores": {
+        "BLIP": {
+          "caption": "there is a bus that is driving down the street in the day time.",
+          "accuracy_score": 30,
+          "object_identification_score": 40,
+          "scene_understanding_score": 20,
+          "missing_elements": [
+            "traffic lights",
+            "intersection",
+            "railroad tracks",
+            "buildings",
+            "crosswalk"
+          ],
+          "incorrect_elements": [
+            "describes only a bus, oversimplified"
+          ],
+          "suggested_improvement": "A busy intersection with railroad tracks, featuring traffic lights, a bus stop, and commercial buildings in a suburban area."
+        },
+        "Florence-2": {
+          "caption": "The image shows a view of a city street from the top of a building. We can see vehicles on the road, traffic signals, poles, traffic cones, plants, trees, buildings, hoardings, and other objects. The sky in the background is filled with clouds.",
+          "accuracy_score": 85,
+          "object_identification_score": 90,
+          "scene_understanding_score": 85,
+          "missing_elements": [
+            "railroad crossing",
+            "crosswalk",
+            "bus stop"
+          ],
+          "incorrect_elements": [
+            "view is from camera/pole height, not building top"
+          ],
+          "suggested_improvement": "An intersection with railroad tracks, featuring traffic signals, commercial buildings, and a bus stop, captured from a traffic camera perspective."
+        },
+        "LLaVA": {
+          "caption": "A busy street with a large billboard in the background. There are multiple cars and trucks on the road, some of which are waiting at a red light. Several traffic lights can be seen at different points along the street, ensuring the smooth flow of traffic. The billboard in the background is advertising something, but it is not clear what the advertisement is for.",
+          "accuracy_score": 75,
+          "object_identification_score": 70,
+          "scene_understanding_score": 80,
+          "missing_elements": [
+            "railroad tracks",
+            "crosswalk",
+            "bus stop"
+          ],
+          "incorrect_elements": [
+            "emphasis on unclear billboard content"
+          ],
+          "suggested_improvement": "A busy intersection with railroad crossing, featuring multiple traffic signals, commercial buildings, and public transit infrastructure."
+        },
+        "Moondream": {
+          "caption": "A white bus and black car navigate a busy city intersection, with traffic lights and street signs guiding the flow, while buildings and trees provide context and contrast.",
+          "accuracy_score": 70,
+          "object_identification_score": 75,
+          "scene_understanding_score": 65,
+          "missing_elements": [
+            "railroad tracks",
+            "bus stop",
+            "commercial district"
+          ],
+          "incorrect_elements": [
+            "oversimplified description of vehicles"
+          ],
+          "suggested_improvement": "A transit-oriented intersection with railroad crossing, featuring traffic signals, a bus stop, and surrounding commercial buildings."
+        }
+      }
+    }
+  ]
+}

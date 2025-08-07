@@ -1,0 +1,6 @@
+Visualization Generation Log
+==================================================
+Timestamp: 2025-08-01 14:36:37
+Input file: RESULTS_20250801_143447\json_outputs\evaluation_results.json
+Models compared: BLIP, Florence-2, LLaVA, Moondream
+Output directory: RESULTS_20250801_143447\visualizations

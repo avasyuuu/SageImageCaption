@@ -1,0 +1,9 @@
+Caption Generation Log
+==================================================
+Timestamp: 2025-08-07 13:21:30
+Input directory: sage_benchmark\sage_images_20250807_131911
+Prompt: Describe this image in one complete sentence with detail
+Models used: BLIP, Florence-2, LLaVA, Moondream, YOLO
+Images processed: 12
+Output JSON: RESULTS_20250807_131943\json_outputs\caption_results.json
+YOLO detections: RESULTS_20250807_131943\yolo_detections

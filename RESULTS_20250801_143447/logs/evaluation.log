@@ -1,0 +1,7 @@
+Caption Evaluation Log
+==================================================
+Timestamp: 2025-08-01 14:36:36
+Input caption file: RESULTS_20250801_143447\json_outputs\caption_results.json
+API calls made: 2
+Images evaluated: 2
+Output JSON: RESULTS_20250801_143447\json_outputs\evaluation_results.json
